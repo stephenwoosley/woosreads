@@ -4,7 +4,7 @@ const Nav = () =>
   <nav className="navbar is-danger" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
       <a className="navbar-item" href="http://bulma.io">
-        woosreads
+        <strong is-size-2>woosreads</strong>
       </a>
     </div>
   </nav>;
