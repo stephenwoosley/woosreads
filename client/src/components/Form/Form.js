@@ -1,5 +1,4 @@
 import React from "react";
-import './Form.css';
 
 const Form = () =>
 
@@ -79,7 +78,7 @@ const Form = () =>
 
     <div className="field is-horizontal">
       <div className="field-label is-normal">
-        <label className="label has-text-white is-paddingless">Comments</label>
+        <label className="label has-text-white is-paddingless">Notes</label>
       </div>
       <div className="field-body">
         <div className="field">
@@ -104,5 +103,7 @@ const Form = () =>
       </div>
     </div>
   </form>
+
+  
 
 export default Form;
