@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Form from "../../components/Form";
+import BookBox from "../../components/BookBox";
 import './Books.css';
 
 class Books extends Component {
@@ -34,6 +35,9 @@ class Books extends Component {
                       </span>  
                     </p>
                     <p className="subtitle">Which Books Were the Best?</p>
+                    <BookBox />
+                    <BookBox />
+                    <BookBox />
                   </article>
                 </div>
                 <div className="tile is-parent">
@@ -44,7 +48,7 @@ class Books extends Component {
                         <i className="fa fa-lightbulb-o"></i>
                       </span>
                     </p>
-                    <p className="subtitle">List of Books</p>
+                    <p className="subtitle">Someday Soon!</p>
                   </article>
                 </div>
               </div>
@@ -72,7 +76,12 @@ class Books extends Component {
                       <i className="fa fa-check"></i>
                     </span>
                   </p>
-                  <p className="subtitle">Look how many you've read!</p>
+                  <p className="subtitle">Look How Many You've Read!</p>
+                  <BookBox />
+                  <BookBox />
+                  <BookBox />
+                  <BookBox />
+                  <BookBox />
                 </div>
               </article>
             </div>
