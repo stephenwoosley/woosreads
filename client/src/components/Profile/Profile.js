@@ -3,10 +3,10 @@ import React from "react";
 const Profile = () =>
   <article className="tile is-child notification is-primary">
     <p className="title">
-      <span className="tile-title">Gabriella Woosley</span>
       <span className="icon is-small is-left">
         <i className="fa fa-flash"></i>
       </span>
+      <span className="tile-title">Gabriella Woosley</span>
     </p>
     <p className="subtitle">Reading Wizard</p>
     <figure className="is-image is-128x128">

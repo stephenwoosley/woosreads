@@ -5,9 +5,28 @@ import Profile from "../../components/Profile/Profile";
 import Favorites from "../../components/Favorites/Favorites";
 import WantToRead from "../../components/WantToRead/WantToRead";
 import Completed from "../../components/Completed/Completed";
+import API from "../../utils/API";
 import './Books.css';
 
 class Books extends Component {
+
+  state = {
+    books: [],
+    user: []
+  }
+
+  componentDidMount() {
+    this.loadBooks();
+  }
+
+  loadBooks = () => {
+    API.getBooks()
+      .then(res =>
+        this.setState({ books: res.data }),
+        console.log(this.state.books)
+      )
+      .catch(err => console.log(err))
+  };
 
   render() {
     return(
