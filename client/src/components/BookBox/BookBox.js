@@ -30,15 +30,6 @@ const BookBox = () =>
         </span>
       </div>
     </div>
-    {/* <div class="columns">
-      <div class="column">
-        <p>Author</p>
-        <p>Title</p>
-      </div>
-      <div class="column">
-        Rating
-      </div>
-    </div> */}
   </div> 
 
 export default BookBox;
