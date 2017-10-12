@@ -9,11 +9,14 @@ const app = express();
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/woosreads",
+  // process.env.MONGODB_URI || 
+  "mongodb://localhost:27017/woosreads",
   {
     useMongoClient: true
   }
-);
+).then(
+  console.log("connected to MongoDB on localhost")
+)
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

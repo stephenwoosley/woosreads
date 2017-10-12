@@ -1,11 +1,12 @@
 import React from "react";
 import './BookBox.css';
 
-const BookBox = () =>
+const BookBox = props =>
   <div className="box">
     <div className="level">
       <div className="level-item left-levels is-size-6">
-        <strong>The Hobbit</strong>
+        <strong>{JSON.stringify(props.books)}</strong>
+        {console.log(JSON.stringify(props.books))}
       </div>
       <div className="level-item left-levels is-size-6">
         <i>J.R.R. Tolkein</i>

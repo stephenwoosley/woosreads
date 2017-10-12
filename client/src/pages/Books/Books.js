@@ -48,7 +48,7 @@ class Books extends Component {
               </div>
             </div>
             <div className="tile is-parent">
-              <Completed />
+              <Completed books={this.state.books}/>
             </div>
           </div>
         </div>

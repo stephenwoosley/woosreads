@@ -8,6 +8,6 @@ const userSchema = new Schema({
   shortDescription: { type: String }
 });
 
-const User = mongoose.model("User", bookSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
