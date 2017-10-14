@@ -12,7 +12,16 @@
 
 @media screen and (max-width: 768px) {
 
-.level-item:not(:last-child) {
-  margin-bottom: .10rem
+  .level-item:not(:last-child) {
+    margin-bottom: .10rem
+  }
 }
+
+li {
+  padding: 0;
+  list-style-type: none;
+}
+
+.content ul {
+  margin-left: 0px;
 }

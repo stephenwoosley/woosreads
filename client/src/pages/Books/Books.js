@@ -21,9 +21,9 @@ class Books extends Component {
 
   loadBooks = () => {
     API.getBooks()
+      // .then(res => console.log(res.data[0]))
       .then(res =>
-        this.setState({ books: res.data }),
-        console.log(this.state.books)
+        this.setState({ books: res.data })
       )
       .catch(err => console.log(err))
   };
@@ -37,7 +37,16 @@ class Books extends Component {
               <div className="tile">
                 <div className="tile is-parent is-vertical">
                   <Profile />
-                  <Favorites />
+                  <Favorites>
+                    {this.state.books.filter(book => {
+                        console.log(book.favorite)
+                        return book.favorite;
+                      }).map( book => 
+                        <BookBox key={book._id}>
+                          {book.title} by {book.author}
+                        </BookBox>
+                      )}
+                  </Favorites>
                 </div>
                 <div className="tile is-parent">
                   <WantToRead />
@@ -48,7 +57,13 @@ class Books extends Component {
               </div>
             </div>
             <div className="tile is-parent">
-              <Completed books={this.state.books}/>
+              <Completed>
+                {this.state.books.map(book => (
+                  <BookBox key={book._id}>
+                    {book.title} by {book.author}
+                  </BookBox>
+                ))}
+              </Completed>
             </div>
           </div>
         </div>
