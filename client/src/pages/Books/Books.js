@@ -49,7 +49,9 @@ class Books extends Component {
                   </Favorites>
                 </div>
                 <div className="tile is-parent">
-                  <WantToRead />
+                  <WantToRead >
+                  
+                  <WantToRead/>
                 </div>
               </div>
               <div className="tile is-parent">
