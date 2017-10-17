@@ -39,7 +39,6 @@ class Books extends Component {
                   <Profile />
                   <Favorites>
                     {this.state.books.filter(book => {
-                        console.log(book.favorite)
                         return book.favorite;
                       }).map( book => 
                         <BookBox key={book._id}>
@@ -49,15 +48,21 @@ class Books extends Component {
                   </Favorites>
                 </div>
                 <div className="tile is-parent">
-                  <WantToRead >
-                  
-                  <WantToRead/>
+                  <WantToRead>
+                      {this.state.books.filter(book => {
+                          return !book.favorite;
+                      }).map( book => 
+                        <BookBox key={book._id}>
+                          {book.title} by {book.author}
+                        </BookBox>
+                      )}
+                  </WantToRead>
                 </div>
               </div>
               <div className="tile is-parent">
                 <FormTile />
               </div>
-            </div>
+            </div> 
             <div className="tile is-parent">
               <Completed>
                 {this.state.books.map(book => (
@@ -66,9 +71,9 @@ class Books extends Component {
                   </BookBox>
                 ))}
               </Completed>
-            </div>
-          </div>
-        </div>
+            </div>{ /* end tile is-parent */}
+          </div> {/* end tile is-ancestor */}
+        </div>  {/* end container-is-fluid */}
       </section>
 
     );

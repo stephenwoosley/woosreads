@@ -1,5 +1,5 @@
 import React from "react";
-import BookBox from "../BookBox/BookBox"
+import BookBox from "../BookBox/BookBox";
 
 const Favorites = ({ children }) => {
   return(
@@ -20,7 +20,6 @@ const Favorites = ({ children }) => {
       </div>
     </article>
   );
-  
 }
 
 export default Favorites;
