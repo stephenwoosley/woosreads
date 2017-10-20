@@ -6,6 +6,7 @@ import Favorites from "../../components/Favorites/Favorites";
 import WantToRead from "../../components/WantToRead/WantToRead";
 import Completed from "../../components/Completed/Completed";
 import API from "../../utils/API";
+import moment from "moment";
 import './Books.css';
 
 class Books extends Component {
@@ -19,7 +20,7 @@ class Books extends Component {
     rating: 0,
     notes: "",
     favorite: false,
-    moment: moment().format('MMMM Do YYYY, h:mm:ss a')
+    date: Date.now()
   };
 
   handleInputChange = event => {
@@ -37,9 +38,18 @@ class Books extends Component {
       rating: this.state.rating,
       note: this.state.notes,
       favorite: this.state.favorite,
-      dateCompleted: this.state.moment
+      dateCompleted: this.state.date
     })
+      .then(res => this.loadBooks())
+      .catch(err => console.log(err));
+  };
 
+  flipFavorite = e => {
+    e.preventDefault()
+    {this.state.favorite
+      ? this.setState({favorite:false})
+      : this.setState({favorite:true})
+    }
   }
   
 
@@ -51,7 +61,7 @@ class Books extends Component {
     API.getBooks()
       // .then(res => console.log(res.data[0]))
       .then(res =>
-        this.setState({ books: res.data })
+        this.setState({ books: res.data, title: "", category: "", author: "", rating:0, notes: "", favorite: false })
       )
       .catch(err => console.log(err))
   };
@@ -64,7 +74,9 @@ class Books extends Component {
             <div className="tile is-vertical is-8">
               <div className="tile">
                 <div className="tile is-parent is-vertical">
-                  <Profile />
+                  <Profile 
+                    date={this.state.date}
+                  />
                   <Favorites>
                     {this.state.books.filter(book => {
                         return book.favorite;
@@ -106,6 +118,7 @@ class Books extends Component {
                     author= {this.state.author}
                     rating= {this.state.rating}
                     submit= {this.handleFormSubmit}
+                    flipFavorite= {this.flipFavorite}
                   />
                 </article>
                 {/* <FormTile /> */}

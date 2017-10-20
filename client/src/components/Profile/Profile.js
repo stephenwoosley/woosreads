@@ -1,6 +1,7 @@
 import React from "react";
+import moment from "moment";
 
-const Profile = () =>
+const Profile = props =>
   <article className="tile is-child notification is-primary">
     <div className="columns is-desktop is-vcentered">
       <div className="column is-two-thirds">
@@ -24,6 +25,7 @@ const Profile = () =>
                 80
               </span>
             </div>
+            {/* <p>{moment(props.date).format("dddd, MMMM Do YYYY, h:mm:ss a")}</p> */}
           </div>
       </div>
     </div>
