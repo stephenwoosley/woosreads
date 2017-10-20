@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FormTile from "../../components/Form/FormTile";
+import Form from "../../components/Form/Form";
 import BookBox from "../../components/BookBox/BookBox";
 import Profile from "../../components/Profile/Profile";
 import Favorites from "../../components/Favorites/Favorites";
@@ -12,8 +12,26 @@ class Books extends Component {
 
   state = {
     books: [],
-    user: []
+    user: [], 
+    title: "",
+    category: "",
+    author: "",
+    rating: 0,
+    notes: ""
+  };
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    
   }
+  
 
   componentDidMount() {
     this.loadBooks();
@@ -60,7 +78,26 @@ class Books extends Component {
                 </div>
               </div>
               <div className="tile is-parent">
-                <FormTile />
+                <article className="tile is-child notification is-danger">
+                  <p className="title has-icons-left">
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-book"></i>
+                    </span>
+                    <span className="tile-title">Add a Book</span>
+                  </p>
+                  <p className="subtitle">
+                    What's New?
+                  </p>
+           
+                  <Form 
+                    handleInputChange = {this.handleInputChange}
+                    title = {this.state.title}
+                    category= {this.state.category}
+                    author= {this.state.author}
+                    rating= {this.state.rating}
+                  />
+                </article>
+                {/* <FormTile /> */}
               </div>
             </div> 
             <div className="tile is-parent">
