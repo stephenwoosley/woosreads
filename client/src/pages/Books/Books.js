@@ -17,7 +17,9 @@ class Books extends Component {
     category: "",
     author: "",
     rating: 0,
-    notes: ""
+    notes: "",
+    favorite: false,
+    moment: moment().format('MMMM Do YYYY, h:mm:ss a')
   };
 
   handleInputChange = event => {
@@ -29,7 +31,15 @@ class Books extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    
+    API.saveBook({
+      title: this.state.title,
+      author: this.state.author,
+      rating: this.state.rating,
+      note: this.state.notes,
+      favorite: this.state.favorite,
+      dateCompleted: this.state.moment
+    })
+
   }
   
 
@@ -95,6 +105,7 @@ class Books extends Component {
                     category= {this.state.category}
                     author= {this.state.author}
                     rating= {this.state.rating}
+                    submit= {this.handleFormSubmit}
                   />
                 </article>
                 {/* <FormTile /> */}

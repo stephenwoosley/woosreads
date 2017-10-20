@@ -125,6 +125,7 @@ const Form = props =>
               <button 
                 className="button is-primary"
                 disabled={!(props.author && props.title && props.category && props.rating)}
+                onClick={props.submit}
               >
                 Submit
               </button>
