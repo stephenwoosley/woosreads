@@ -6,10 +6,15 @@ import Favorites from "../../components/Favorites/Favorites";
 import WantToRead from "../../components/WantToRead/WantToRead";
 import Completed from "../../components/Completed/Completed";
 import API from "../../utils/API";
+import Stars from "../../components/BookBox/Stars";
 import moment from "moment";
 import './Books.css';
 
 class Books extends Component {
+
+  toBeDangerouslyReturned = () => {
+    return {__html: '<hr></hr>\n'};
+  }
 
   state = {
     books: [],
@@ -128,7 +133,34 @@ class Books extends Component {
               <Completed>
                 {this.state.books.map(book => (
                   <BookBox key={book._id}>
-                    {book.title} by {book.author}
+                    <div>
+                      <span className="icon is-small is-left">
+                        <i className="fa fa-book"></i>
+                      </span>
+                      <span className="bookbox-title">
+                        <strong>{book.title}</strong>
+                      </span>
+                    </div>
+                    <div>
+                      <span className="icon is-small is-left">
+                        <i className="fa fa-user"></i>
+                      </span>
+                      <span className="bookbox-title">
+                        <i>{book.author}</i>
+                      </span>
+                    </div>
+                    <div className="level">
+                      <div className="level-item has-text-centered">
+                        <div>
+                          <span>{book.rating}</span>
+                        </div>
+                      </div>
+                      <div className="level-item has-text-centered">
+                        <div>
+                          <span>{moment(book.dateCompleted).format("MM.DD.YYYY")}</span>
+                        </div>
+                      </div>
+                    </div>
                   </BookBox>
                 ))}
               </Completed>
