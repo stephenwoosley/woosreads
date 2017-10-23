@@ -6,7 +6,7 @@ import Favorites from "../../components/Favorites/Favorites";
 import WantToRead from "../../components/WantToRead/WantToRead";
 import Completed from "../../components/Completed/Completed";
 import API from "../../utils/API";
-import Stars from "../../components/BookBox/Stars";
+import Star from "../../components/BookBox/Star";
 import moment from "moment";
 import './Books.css';
 
@@ -25,7 +25,8 @@ class Books extends Component {
     rating: 0,
     notes: "",
     favorite: false,
-    date: Date.now()
+    date: Date.now(),
+    currentRatingArr: []
   };
 
   handleInputChange = event => {
@@ -34,6 +35,17 @@ class Books extends Component {
       [name]: value
     });
   };
+
+  populateStars = (rating) => {
+    let ratingArray = []
+    for (let i = 0; i < rating; i++) {
+      ratingArray.push(i);
+    }
+    ratingArray.map(rating =>
+      <Star />
+    )
+  }
+ 
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -150,14 +162,14 @@ class Books extends Component {
                       </span>
                     </div>
                     <div className="level">
-                      <div className="level-item has-text-centered">
+                      <div className="level-item has-text-centered is-size-7">
                         <div>
-                          <span>{book.rating}</span>
+                          {this.populateStars(book.rating)}
                         </div>
                       </div>
-                      <div className="level-item has-text-centered">
+                      <div className="level-item has-text-centered is-size-7">
                         <div>
-                          <span>{moment(book.dateCompleted).format("MM.DD.YYYY")}</span>
+                          <span>{moment(book.dateCompleted).format("MM.DD.YY")}</span>
                         </div>
                       </div>
                     </div>
