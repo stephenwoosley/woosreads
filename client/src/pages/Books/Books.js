@@ -41,9 +41,10 @@ class Books extends Component {
     for (let i = 0; i < rating; i++) {
       ratingArray.push(i);
     }
-    ratingArray.map(rating =>
-      <Star />
-    )
+    console.log(`rating array is ${ratingArray.length} items long.`)
+    return ratingArray.map(rating => {
+        return <Star/>
+    })
   }
  
 
