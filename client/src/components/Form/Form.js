@@ -75,7 +75,7 @@ const Form = props =>
           <label className="label has-text-white">Rating</label>
         </div>
         <div className="field-body">
-          <div className="field">
+          <div className="field has-addons has-addons-left">
             <fieldset 
               className="rating" 
               name="rating"
@@ -97,11 +97,11 @@ const Form = props =>
         </div>
       </div>
       <div className= "field is-horizontal">
-      <div className="field-label is-normal">
-          <label className="label has-text-white is-paddingless">Favorite?</label>
+        <div className="field-label is-normal">
+          <label className="label has-text-white">Favorite?</label>
         </div>
         <div className="field-body">
-          <div className="field">
+          <div className="field has-addons has-addons-left">
             <fieldset
               className="favorite" 
               name="favorite"
