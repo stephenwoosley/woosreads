@@ -4,11 +4,11 @@ import moment from "moment";
 const Profile = props =>
   <article className="tile is-child notification is-primary">
     <div className="columns is-desktop is-vcentered">
-      <div className="column is-two-thirds">
+      <div className="column is-half">
         <figure className="is-image is-128x128">
-          <img className="g-image"src="http://res.cloudinary.com/stephenrwoosley/image/upload/v1507595613/g-tough_ztntg7.png"></img>
+          <img className="g-image"src="http://res.cloudinary.com/stephenrwoosley/image/upload/c_crop,g_face,h_3024,w_2136,x_0,y_0/v1508855448/IMG_3224_a0haht.jpg"></img>
         </figure>
-        <p className="title">Gabriella Woosley</p>
+        
           {/* <span className="icon is-small is-left">
             <i className="fa fa-flash"></i>
           </span> */}
@@ -17,13 +17,17 @@ const Profile = props =>
       </div>
       <div className="column">
           <div className="has-text-centered books-read">
-            <div className="is-size-4 books-read-title">
-              <strong>Books Read:</strong>
+            <p className="title">Gabriella Woosley</p>
+            <div className="is-size-6 books-read-title">
+              <strong>Has finished</strong>
             </div>
             <div className="books-read-number">
               <span className="tag is-danger is-large">
                 {props.bookCount}
               </span>
+            </div>
+            <div className="is-size-6 books-read-title">
+              <strong>books since 10/31/17.</strong>
             </div>
             {/* <p>{moment(props.date).format("dddd, MMMM Do YYYY, h:mm:ss a")}</p> */}
           </div>
