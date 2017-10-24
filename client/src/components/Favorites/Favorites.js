@@ -13,7 +13,7 @@ const Favorites = ({ children }) => {
             Favorites
           </span>
         </p>
-        <p className="subtitle">Top Books Here!</p>
+        {/* <p className="subtitle">Top Books Here!</p> */}
         <ul>
           {children}
         </ul>

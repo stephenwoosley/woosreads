@@ -11,7 +11,7 @@ const Completed = ({ children }) => {
           </span>
           <span className="tile-title">Completed</span>
         </p>
-        <p className="subtitle">Look How Many You've Read!</p>
+        {/* <p className="subtitle">Look How Many You've Read!</p> */}
         <ul>
           {children}
         </ul>
