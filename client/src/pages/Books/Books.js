@@ -100,7 +100,34 @@ class Books extends Component {
                         return book.favorite;
                       }).map( book => 
                         <BookBox key={book._id}>
-                          {book.title} by {book.author}
+                          <div>
+                            <span className="icon is-small is-left">
+                              <i className="fa fa-book"></i>
+                            </span>
+                            <span className="bookbox-title">
+                              <strong>{book.title}</strong>
+                            </span>
+                          </div>
+                          <div>
+                            <span className="icon is-small is-left">
+                              <i className="fa fa-user"></i>
+                            </span>
+                            <span className="bookbox-title">
+                              <i>{book.author}</i>
+                            </span>
+                          </div>
+                          <div className="level is-mobile">
+                            <div className="level-item has-text-centered is-size-7">
+                              <div>
+                                {this.populateStars(book.rating)}
+                              </div>
+                            </div>
+                            <div className="level-item has-text-centered is-size-7">
+                              <div>
+                                <span>{moment(book.dateCompleted).format("MM.DD.YY")}</span>
+                              </div>
+                            </div>
+                          </div>
                         </BookBox>
                       )}
                   </Favorites>
@@ -111,7 +138,22 @@ class Books extends Component {
                           return !book.favorite;
                       }).map( book => 
                         <BookBox key={book._id}>
-                          {book.title} by {book.author}
+                          <div>
+                            <span className="icon is-small is-left">
+                              <i className="fa fa-book"></i>
+                            </span>
+                            <span className="bookbox-title">
+                              <strong>{book.title}</strong>
+                            </span>
+                          </div>
+                          <div>
+                            <span className="icon is-small is-left">
+                              <i className="fa fa-user"></i>
+                            </span>
+                            <span className="bookbox-title">
+                              <i>{book.author}</i>
+                            </span>
+                          </div>
                         </BookBox>
                       )}
                   </WantToRead>
@@ -162,7 +204,7 @@ class Books extends Component {
                         <i>{book.author}</i>
                       </span>
                     </div>
-                    <div className="level">
+                    <div className="level is-mobile">
                       <div className="level-item has-text-centered is-size-7">
                         <div>
                           {this.populateStars(book.rating)}
