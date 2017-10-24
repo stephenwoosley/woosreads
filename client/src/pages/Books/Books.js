@@ -94,6 +94,7 @@ class Books extends Component {
                 <div className="tile is-parent is-vertical">
                   <Profile 
                     date={this.state.date}
+                    bookCount={this.state.books.length}
                   />
                   <Favorites>
                     {this.state.books.filter(book => {
@@ -117,17 +118,21 @@ class Books extends Component {
                             </span>
                           </div>
                           <div className="level is-mobile">
+                          <div className="level-left">
                             <div className="level-item has-text-centered is-size-7">
                               <div>
                                 {this.populateStars(book.rating)}
                               </div>
                             </div>
+                          </div>
+                          <div className="level-right">
                             <div className="level-item has-text-centered is-size-7">
                               <div>
                                 <span>{moment(book.dateCompleted).format("MM.DD.YY")}</span>
                               </div>
                             </div>
                           </div>
+                        </div>
                         </BookBox>
                       )}
                   </Favorites>
@@ -167,10 +172,6 @@ class Books extends Component {
                     </span>
                     <span className="tile-title">Add a Book</span>
                   </p>
-                  <p className="subtitle">
-                    What's New?
-                  </p>
-           
                   <Form 
                     handleInputChange = {this.handleInputChange}
                     title = {this.state.title}
@@ -181,7 +182,6 @@ class Books extends Component {
                     flipFavorite= {this.flipFavorite}
                   />
                 </article>
-                {/* <FormTile /> */}
               </div>
             </div> 
             <div className="tile is-parent">
@@ -205,14 +205,18 @@ class Books extends Component {
                       </span>
                     </div>
                     <div className="level is-mobile">
-                      <div className="level-item has-text-centered is-size-7">
-                        <div>
-                          {this.populateStars(book.rating)}
+                      <div className="level-left">
+                        <div className="level-item has-text-centered is-size-7">
+                          <div>
+                            {this.populateStars(book.rating)}
+                          </div>
                         </div>
                       </div>
-                      <div className="level-item has-text-centered is-size-7">
-                        <div>
-                          <span>{moment(book.dateCompleted).format("MM.DD.YY")}</span>
+                      <div className="level-right">
+                        <div className="level-item has-text-centered is-size-7">
+                          <div>
+                            <span>{moment(book.dateCompleted).format("MM.DD.YY")}</span>
+                          </div>
                         </div>
                       </div>
                     </div>

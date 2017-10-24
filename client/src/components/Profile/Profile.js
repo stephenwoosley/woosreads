@@ -13,7 +13,7 @@ const Profile = props =>
             <i className="fa fa-flash"></i>
           </span> */}
           {/* <span className="tile-title">Gabriella Woosley</span> */}
-        <p className="subtitle">reading wizard</p>
+        {/* <p className="subtitle">reading wizard</p> */}
       </div>
       <div className="column">
           <div className="has-text-centered books-read">
@@ -22,7 +22,7 @@ const Profile = props =>
             </div>
             <div className="books-read-number">
               <span className="tag is-danger is-large">
-                80
+                {props.bookCount}
               </span>
             </div>
             {/* <p>{moment(props.date).format("dddd, MMMM Do YYYY, h:mm:ss a")}</p> */}
