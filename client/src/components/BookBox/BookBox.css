@@ -1,5 +1,6 @@
 .box {
   padding: .5rem;
+  cursor: pointer;
 }
 
 .level:not(:last-child) {
@@ -25,3 +26,16 @@ li {
 .content ul {
   margin-left: 0px;
 }
+
+
+
+
+/* @media (max-width: 1080px), screen and (min-width: 769px ) {
+
+  .tile.is-8 {
+    width: 100%;
+  }
+  .tile {
+    width: 100%;
+  }
+} */

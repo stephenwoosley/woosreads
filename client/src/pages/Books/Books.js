@@ -70,8 +70,16 @@ class Books extends Component {
     }
   }
   
-
   componentDidMount() {
+    this.loadBooks();
+  }
+
+  removeFavorite = (id, bookFavorite) => {
+    console.log("clicked and id is " + id)
+    console.log("bookFavorite inside removeFAv func is " + bookFavorite)
+    bookFavorite ? bookFavorite = false : bookFavorite = true;
+    console.log("favorite is "+ bookFavorite)
+    this.updateBookFavorite(id, bookFavorite);
     this.loadBooks();
   }
 
@@ -84,11 +92,31 @@ class Books extends Component {
       .catch(err => console.log(err))
   };
 
+  updateBook = (id) => {
+    console.log("bookFavorite inside React updateBook func = ")
+    API.updateBook(id)
+    .then(res => this.loadBooks())
+    .catch(err => console.log(err));
+  }
+
+  updateBookFavorite = (id, bookFavorite) => {
+    console.log("bookFavorite inside React updateBookFavorite func = " + bookFavorite)
+    API.updateBookFavorite(id, bookFavorite)
+    .then(res => this.loadBooks())
+    .catch(err => console.log(err));
+  }
+
+  deleteBook = id => {
+    API.deleteBook(id)
+      .then(res => this.loadBooks())
+      .catch(err => console.log(err));
+  };
+
   render() {
     return(
       <section className="section">
         <div className="container is-fluid">
-          <div className="tile is-ancestor">
+          <div className="tile is-desktop is-ancestor">
             <div className="tile is-vertical is-8">
               <div className="tile">
                 <div className="tile is-parent is-vertical">
@@ -101,13 +129,21 @@ class Books extends Component {
                         return book.favorite;
                       }).map( book => 
                         <BookBox key={book._id}>
-                          <div>
+                          <div className="deleteContainer">
                             <span className="icon is-small is-left">
                               <i className="fa fa-book"></i>
                             </span>
                             <span className="bookbox-title">
                               <strong>{book.title}</strong>
                             </span>
+                            <a 
+                              className="un-bookmark is-small"
+                              onClick={() => this.removeFavorite(book._id, book.favorite)}
+                            >
+                            <span className="un-bookmark-span icon is-small is-left">
+                              <i className="fa fa-bookmark"></i>
+                            </span>
+                            </a>
                           </div>
                           <div>
                             <span className="icon is-small is-left">
@@ -118,21 +154,21 @@ class Books extends Component {
                             </span>
                           </div>
                           <div className="level is-mobile">
-                          <div className="level-left">
-                            <div className="level-item has-text-centered is-size-7">
-                              <div>
-                                {this.populateStars(book.rating)}
+                            <div className="level-left">
+                              <div className="level-item has-text-centered is-size-7">
+                                <div>
+                                  {this.populateStars(book.rating)}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="level-right">
+                              <div className="level-item has-text-centered is-size-7">
+                                <div>
+                                  <span>{moment(book.dateCompleted).format("MM.DD.YY")}</span>
+                                </div>
                               </div>
                             </div>
                           </div>
-                          <div className="level-right">
-                            <div className="level-item has-text-centered is-size-7">
-                              <div>
-                                <span>{moment(book.dateCompleted).format("MM.DD.YY")}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                         </BookBox>
                       )}
                   </Favorites>
@@ -143,13 +179,14 @@ class Books extends Component {
                           return !book.favorite;
                       }).map( book => 
                         <BookBox key={book._id}>
-                          <div>
+                          <div className="deleteContainer">
                             <span className="icon is-small is-left">
                               <i className="fa fa-book"></i>
                             </span>
                             <span className="bookbox-title">
                               <strong>{book.title}</strong>
                             </span>
+                            <button className="delete is-small"></button>
                           </div>
                           <div>
                             <span className="icon is-small is-left">
