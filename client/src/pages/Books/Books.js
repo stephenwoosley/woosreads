@@ -25,8 +25,10 @@ class Books extends Component {
     rating: 0,
     notes: "",
     favorite: false,
+    wantToRead: false,
     date: Date.now(),
-    currentRatingArr: []
+    currentRatingArr: [],
+    categorySwitch: ""
   };
 
   handleInputChange = event => {
@@ -69,17 +71,37 @@ class Books extends Component {
       : this.setState({favorite:true})
     }
   }
+
+  flipCategorySwitch = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+    if(this.state.category == "") {
+      this.setState({categorySwitch:"Want to Read"})
+    }
+    else if(this.state.category == "Want to Read") {
+      this.setState({categorySwitch:"Finished Reading"})
+    }
+    else if(this.state.category == "Finished Reading") {
+      this.setState({categorySwitch:"Want to Read"})
+    }
+    // {this.state.category=="Want to Read" && this.setState({categorySwitch:"Finished Reading"})
+    // }
+    // {this.state.category=="Finished Reading" && this.setState({categorySwitch:"Want to Read"})
+    // }
+  }
   
   componentDidMount() {
     this.loadBooks();
   }
 
-  removeFavorite = (id, bookFavorite) => {
+  removeFavorite = (id, book) => {
     console.log("clicked and id is " + id)
-    console.log("bookFavorite inside removeFAv func is " + bookFavorite)
-    bookFavorite ? bookFavorite = false : bookFavorite = true;
-    console.log("favorite is "+ bookFavorite)
-    this.updateBookFavorite(id, bookFavorite);
+    console.log("book favorite inside removeFAv func is " + book.favorite)
+    book.favorite ? book.favorite = false : book.favorite = true;
+    console.log("book favorite is now "+ book.favorite)
+    this.updateBookFavorite(id, book);
     this.loadBooks();
   }
 
@@ -99,9 +121,9 @@ class Books extends Component {
     .catch(err => console.log(err));
   }
 
-  updateBookFavorite = (id, bookFavorite) => {
-    console.log("bookFavorite inside React updateBookFavorite func = " + bookFavorite)
-    API.updateBookFavorite(id, bookFavorite)
+  updateBookFavorite = (id, book) => {
+    console.log("book object's fav prop inside React updateBookFavorite func = " + book.favorite)
+    API.updateBookFavorite(id, book)
     .then(res => this.loadBooks())
     .catch(err => console.log(err));
   }
@@ -138,7 +160,7 @@ class Books extends Component {
                             </span>
                             <a 
                               className="un-bookmark is-small"
-                              onClick={() => this.removeFavorite(book._id, book.favorite)}
+                              onClick={() => this.removeFavorite(book._id, book)}
                             >
                             <span className="un-bookmark-span icon is-small is-left">
                               <i className="fa fa-bookmark"></i>
@@ -176,7 +198,7 @@ class Books extends Component {
                 <div className="tile is-parent">
                   <WantToRead>
                       {this.state.books.filter(book => {
-                          return !book.favorite;
+                          return book.wantToRead;
                       }).map( book => 
                         <BookBox key={book._id}>
                           <div className="deleteContainer">
@@ -216,7 +238,10 @@ class Books extends Component {
                     author= {this.state.author}
                     rating= {this.state.rating}
                     submit= {this.handleFormSubmit}
+                    wantToRead={this.state.wantToRead}
                     flipFavorite= {this.flipFavorite}
+                    categorySwitch= {this.state.categorySwitch}
+                    flipCategorySwitch={this.flipCategorySwitch}
                   />
                 </article>
               </div>

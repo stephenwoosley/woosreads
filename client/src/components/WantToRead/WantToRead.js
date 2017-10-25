@@ -10,7 +10,6 @@ const WantToRead = ({ children }) => {
         </span>
         <span className="tile-title">Want to Read</span>
       </p>
-      {/* <p className="subtitle">Someday Soon!</p> */}
       <ul>
         {children}
       </ul>

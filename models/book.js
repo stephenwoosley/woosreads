@@ -7,6 +7,7 @@ const bookSchema = new Schema({
   rating: { type: Number },
   note: { type: String },
   favorite: { type: Boolean },
+  wantToRead: {type: Boolean},
   dateCompleted: { type: Date, default: Date.now }
 });
 
