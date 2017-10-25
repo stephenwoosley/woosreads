@@ -14,6 +14,75 @@
   margin-left: 7.5px;
 }
 
+.bookbox-star {
+  color: #FFD700;
+}
+
 .box {
   margin-bottom: .25rem
+}
+
+.un-bookmark.is-small, .delete.is-small{
+  position: absolute;
+  right: .05em;
+  top: .05em;
+  
+  /* margin-left: 10px; */
+}
+
+.un-bookmark-span{
+  display: -webkit-inline-box;
+  color: #5FCDB3;
+}
+
+.un-bookmark-span:hover{
+  color: #FF2B56;
+}
+
+.deleteContainer {
+  position: relative;
+}
+
+.finished-books {
+  border: 4px solid #ffffff;
+  border-radius:4px;
+  padding: 5px 5px 5px 5px;
+}
+
+
+@media screen and (min-width: 450px) and (max-width: 768px) {
+  .name-title {
+    font-size: 2rem !important;
+  }
+  .books-read-title {
+    font-size: 1.25rem !important;
+  }
+}
+
+
+
+
+
+@media screen and (max-width: 1080px) {
+  .tile.is-8 {
+    width: 100%;
+  }
+  .tile {
+    width: 100%;
+  }
+  .is-ancestor {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .tile.is-8 {
+    width: 100%;
+  }
+  .tile {
+    width: 100%;
+  }
+  .is-ancestor {
+    flex-wrap: wrap;
+  }
 }

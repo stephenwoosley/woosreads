@@ -3,7 +3,7 @@ import './BookBox.css';
 
 const Star = props =>
 
-  <span className="icon is-small is-left">
+  <span className="icon bookbox-star is-small is-left">
     <i className="fa fa-star"></i>
   </span>
 

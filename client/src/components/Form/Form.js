@@ -63,7 +63,6 @@ const Form = props =>
                 <option></option>
                   <option>Finished Reading</option>
                   <option>Want to Read</option>
-                  <option>Favorite!</option>
                 </select>
               </div>
             </div>
