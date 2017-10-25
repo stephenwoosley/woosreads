@@ -29,7 +29,7 @@ module.exports = {
   },
   updateFavorite: function(req, res) {
     db.Book
-    .findOneAndUpdate({ _id: req.params.id }, { $inc : { "favorite": req.body}})
+    .findOneAndUpdate({ _id: req.params.id }, { $set : { "favorite": req.body}})
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
   },
