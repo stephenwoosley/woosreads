@@ -71,8 +71,8 @@ const Form = props =>
                   name="category"
                 >
                 <option></option>
-                <option>Finished Reading</option>
-                  <option>Want to Read</option>
+                <option value="Finished Reading">Finished Reading</option>
+                  <option value="Want to Read">Want to Read</option>
                 </select>
               </div>
             </div>
