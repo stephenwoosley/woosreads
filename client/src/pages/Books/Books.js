@@ -28,7 +28,8 @@ class Books extends Component {
     wantToRead: false,
     date: Date.now(),
     currentRatingArr: [],
-    categorySwitch: ""
+    categorySwitch: "",
+    showExtraFields: false
   };
 
   handleInputChange = event => {
@@ -77,15 +78,18 @@ class Books extends Component {
     this.setState({
       [name]: value
     });
-    if(this.state.category == "") {
-      this.setState({categorySwitch:"Want to Read"})
-    }
-    else if(this.state.category == "Want to Read") {
-      this.setState({categorySwitch:"Finished Reading"})
-    }
-    else if(this.state.category == "Finished Reading") {
-      this.setState({categorySwitch:"Want to Read"})
-    }
+    // if(this.state.category == "") {
+    //   this.setState({showExtraFields:false})
+    //   // this.setState({categorySwitch:"Want to Read"})
+    // }
+    // else if(this.state.category == "Want to Read") {
+    //   this.setState({showExtraFields:false})
+    //   // this.setState({categorySwitch:"Finished Reading"})
+    // }
+    // else if(this.state.category == "Finished Reading") {
+    //   this.setState({showExtraFields:true})
+    //   // this.setState({categorySwitch:"Want to Read"})
+    // }
     // {this.state.category=="Want to Read" && this.setState({categorySwitch:"Finished Reading"})
     // }
     // {this.state.category=="Finished Reading" && this.setState({categorySwitch:"Want to Read"})
@@ -242,6 +246,7 @@ class Books extends Component {
                     flipFavorite= {this.flipFavorite}
                     categorySwitch= {this.state.categorySwitch}
                     flipCategorySwitch={this.flipCategorySwitch}
+                    showExtraFields={this.state.showExtraFields}
                   />
                 </article>
               </div>
