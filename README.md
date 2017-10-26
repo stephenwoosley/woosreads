@@ -6,10 +6,10 @@ This app will be a repository of books that the Woosley family has read and want
 
 
 ####TODO:
-~~* Profile Card - fix Name. Firstname one line, Lastname next line~~
-~~* Profile Card - better way to display # of books read~~
-~~* Completed Card - Title bad at 1/2 width page~~
-* Form Card - Favorite and Notes fields should be conditional on category
+* ~~Profile Card - fix Name. Firstname one line, Lastname next line~~
+* ~~Profile Card - better way to display # of books read~~
+* ~~Completed Card - Title bad at 1/2 width page~~
+* ~~Form Card - Favorite and Notes fields should be conditional on category~~
 * Individual Book Pages
 * Edit Favorite from Favorite Card (x button)
 * Edit Want to Read from WTR card
