@@ -81,7 +81,7 @@ const Form = props =>
       </div>
 
       {/* Conditional Fields */}        
-       { props.categorySwitch == ""
+       { props.categorySwitch === ""
         ? <Submit 
             author={props.author}
             title={props.title}
@@ -89,7 +89,7 @@ const Form = props =>
             rating={props.rating}
             submit={props.submit}
           />
-        : (props.categorySwitch == "Finished Reading"
+        : (props.categorySwitch === "Finished Reading"
             ? <div>
                 <Rating 
                   rating={props.rating}

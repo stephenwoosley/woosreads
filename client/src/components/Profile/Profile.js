@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 
 const Profile = props =>
   <article className="tile is-child notification is-primary">

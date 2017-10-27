@@ -1,20 +1,15 @@
 import React, { Component } from "react";
 import Form from "../../components/Form/Form";
-import BookBox from "../../components/BookBox/BookBox";
 import Profile from "../../components/Profile/Profile";
 import Favorites from "../../components/Favorites/Favorites";
 import WantToRead from "../../components/WantToRead/WantToRead";
 import Completed from "../../components/Completed/Completed";
 import API from "../../utils/API";
 import Star from "../../components/BookBox/Star";
-import moment from "moment";
+import Modal from "../../components/Modal/Modal";
 import './Books.css';
 
 class Books extends Component {
-
-  toBeDangerouslyReturned = () => {
-    return {__html: '<hr></hr>\n'};
-  }
 
   state = {
     books: [],
@@ -29,7 +24,21 @@ class Books extends Component {
     date: Date.now(),
     currentRatingArr: [],
     categorySwitch: "",
-    showExtraFields: false
+    showExtraFields: false,
+    showModal: false
+  };
+
+  componentDidMount() {
+    this.loadBooks();
+  }
+
+  loadBooks = () => {
+    API.getBooks()
+      // .then(res => console.log(res.data[0]))
+      .then(res =>
+        this.setState({ books: res.data, title: "", category: "", author: "", rating:0, notes: "", favorite: false })
+      )
+      .catch(err => console.log(err))
   };
 
   handleInputChange = event => {
@@ -38,18 +47,6 @@ class Books extends Component {
       [name]: value
     });
   };
-
-  populateStars = (rating) => {
-    let ratingArray = []
-    for (let i = 0; i < rating; i++) {
-      ratingArray.push(i);
-    }
-    console.log(`rating array is ${ratingArray.length} items long.`)
-    return ratingArray.map(rating => {
-        return <Star/>
-    })
-  }
- 
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -67,17 +64,26 @@ class Books extends Component {
 
   flipFavorite = e => {
     e.preventDefault()
-    {this.state.favorite
+    this.state.favorite
       ? this.setState({favorite:false})
       : this.setState({favorite:true})
-    }
+    
   }
+
+  flipModal = e => {
+    e.preventDefault()
+    console.log("flipping click working in flipModal")
+    {!this.state.showModal && this.setState({showModal:true})}
+  }
+
 
   flipCategorySwitch = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
+
+
     // if(this.state.category == "") {
     //   this.setState({showExtraFields:false})
     //   // this.setState({categorySwitch:"Want to Read"})
@@ -95,10 +101,6 @@ class Books extends Component {
     // {this.state.category=="Finished Reading" && this.setState({categorySwitch:"Want to Read"})
     // }
   }
-  
-  componentDidMount() {
-    this.loadBooks();
-  }
 
   removeFavorite = (id, book) => {
     console.log("clicked and id is " + id)
@@ -109,14 +111,16 @@ class Books extends Component {
     this.loadBooks();
   }
 
-  loadBooks = () => {
-    API.getBooks()
-      // .then(res => console.log(res.data[0]))
-      .then(res =>
-        this.setState({ books: res.data, title: "", category: "", author: "", rating:0, notes: "", favorite: false })
-      )
-      .catch(err => console.log(err))
-  };
+  populateStars = (rating) => {
+    let ratingArray = []
+    for (let i = 0; i < rating; i++) {
+      ratingArray.push(i);
+    }
+    console.log(`rating array is ${ratingArray.length} items long.`)
+    return ratingArray.map(rating => {
+        return <Star/>
+    })
+  }
 
   updateBook = (id) => {
     console.log("bookFavorite inside React updateBook func = ")
@@ -142,6 +146,19 @@ class Books extends Component {
     return(
       <section className="section">
         <div className="container is-fluid">
+          {this.state.showModal && 
+            <Modal 
+              handleInputChange = {this.handleInputChange}
+              title = {this.state.title}
+              category= {this.state.category}
+              author= {this.state.author}
+              rating= {this.state.rating}
+              submit= {this.handleFormSubmit}
+              wantToRead={this.state.wantToRead}
+              flipFavorite= {this.flipFavorite}
+            />
+          }
+          
           <div className="tile is-desktop is-ancestor">
             <div className="tile is-vertical is-8">
               <div className="tile">
@@ -150,81 +167,20 @@ class Books extends Component {
                     date={this.state.date}
                     bookCount={this.state.books.length}
                   />
-                  <Favorites>
-                    {this.state.books.filter(book => {
-                        return book.favorite;
-                      }).map( book => 
-                        <BookBox key={book._id}>
-                          <div className="deleteContainer">
-                            <span className="icon is-small is-left">
-                              <i className="fa fa-book"></i>
-                            </span>
-                            <span className="bookbox-title">
-                              <strong>{book.title}</strong>
-                            </span>
-                            <a 
-                              className="un-bookmark is-small"
-                              onClick={() => this.removeFavorite(book._id, book)}
-                            >
-                            <span className="un-bookmark-span icon is-small is-left">
-                              <i className="fa fa-bookmark"></i>
-                            </span>
-                            </a>
-                          </div>
-                          <div>
-                            <span className="icon is-small is-left">
-                              <i className="fa fa-user"></i>
-                            </span>
-                            <span className="bookbox-title">
-                              <i>{book.author}</i>
-                            </span>
-                          </div>
-                          <div className="level is-mobile">
-                            <div className="level-left">
-                              <div className="level-item has-text-centered is-size-7">
-                                <div>
-                                  {this.populateStars(book.rating)}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="level-right">
-                              <div className="level-item has-text-centered is-size-7">
-                                <div>
-                                  <span>{moment(book.dateCompleted).format("MM.DD.YY")}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </BookBox>
-                      )}
-                  </Favorites>
+                  <Favorites 
+                    showModal={this.state.showModal}
+                    flipModal={this.flipModal}
+                    books={this.state.books}
+                    populateStars={(rating) => this.populateStars(rating)}
+                    removeFavorite={(id, book) => this.removeFavorite(id, book)}
+                  />
                 </div>
                 <div className="tile is-parent">
-                  <WantToRead>
-                      {this.state.books.filter(book => {
-                          return book.wantToRead;
-                      }).map( book => 
-                        <BookBox key={book._id}>
-                          <div className="deleteContainer">
-                            <span className="icon is-small is-left">
-                              <i className="fa fa-book"></i>
-                            </span>
-                            <span className="bookbox-title">
-                              <strong>{book.title}</strong>
-                            </span>
-                            <button className="delete is-small"></button>
-                          </div>
-                          <div>
-                            <span className="icon is-small is-left">
-                              <i className="fa fa-user"></i>
-                            </span>
-                            <span className="bookbox-title">
-                              <i>{book.author}</i>
-                            </span>
-                          </div>
-                        </BookBox>
-                      )}
-                  </WantToRead>
+                  <WantToRead 
+                    books={this.state.books}
+                    showModal={this.state.showModal}
+                    flipModal={this.flipModal}
+                  />
                 </div>
               </div>
               <div className="tile is-parent">
@@ -244,52 +200,21 @@ class Books extends Component {
                     submit= {this.handleFormSubmit}
                     wantToRead={this.state.wantToRead}
                     flipFavorite= {this.flipFavorite}
-                    categorySwitch= {this.state.categorySwitch}
-                    flipCategorySwitch={this.flipCategorySwitch}
                     showExtraFields={this.state.showExtraFields}
                   />
                 </article>
               </div>
             </div> 
             <div className="tile is-parent">
-              <Completed>
-                {this.state.books.map(book => (
-                  <BookBox key={book._id}>
-                    <div>
-                      <span className="icon is-small is-left">
-                        <i className="fa fa-book"></i>
-                      </span>
-                      <span className="bookbox-title">
-                        <strong>{book.title}</strong>
-                      </span>
-                    </div>
-                    <div>
-                      <span className="icon is-small is-left">
-                        <i className="fa fa-user"></i>
-                      </span>
-                      <span className="bookbox-title">
-                        <i>{book.author}</i>
-                      </span>
-                    </div>
-                    <div className="level is-mobile">
-                      <div className="level-left">
-                        <div className="level-item has-text-centered is-size-7">
-                          <div>
-                            {this.populateStars(book.rating)}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="level-right">
-                        <div className="level-item has-text-centered is-size-7">
-                          <div>
-                            <span>{moment(book.dateCompleted).format("MM.DD.YY")}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </BookBox>
-                ))}
-              </Completed>
+              <Completed
+                showModal={this.state.showModal}
+                flipModal={this.flipModal}
+                books={this.state.books}
+                //{function(rating){
+                  //return this.populateStars(rating)
+                //}}
+                populateStars={(rating) => this.populateStars(rating)}
+              />
             </div>{ /* end tile is-parent */}
           </div> {/* end tile is-ancestor */}
         </div>  {/* end container-is-fluid */}

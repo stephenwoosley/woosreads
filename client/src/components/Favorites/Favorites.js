@@ -1,7 +1,7 @@
 import React from "react";
-import BookBox from "../BookBox/BookBox";
+import BookBoxFavorite from "../BookBox/BookBoxFavorite";
 
-const Favorites = ({ children }) => {
+const Favorites = (props) => {
   return(
     <article className="tile is-child notification is-warning">
       <div className="content">
@@ -13,9 +13,25 @@ const Favorites = ({ children }) => {
             Favorites
           </span>
         </p>
-        {/* <p className="subtitle">Top Books Here!</p> */}
         <ul>
-          {children}
+          {props.books.filter(book => {
+            return book.favorite;
+          }).map( book => 
+            <BookBoxFavorite 
+              key={book._id}
+              showModal={props.showModal}
+              flipModal={props.flipModal}
+              onClick={props.flipModal}
+              populateStars={props.populateStars}
+              title={book.title}
+              author={book.author}
+              completed={book.completed}
+              notes={book.notes}
+              rating={book.rating}
+              book={book}
+              removeFavorite={props.removeFavorite}
+            />
+          )} 
         </ul>
       </div>
     </article>
