@@ -1,7 +1,7 @@
 import React from "react";
-import BookBox from "../BookBox/BookBox";
+import BookBoxWant from "../BookBox/BookBoxWant";
 
-const WantToRead = ({ children }) => {
+const WantToRead = (props) => {
   return(
     <article className="tile is-child notification is-info">
       <p className="title">
@@ -11,7 +11,20 @@ const WantToRead = ({ children }) => {
         <span className="tile-title">Want to Read</span>
       </p>
       <ul>
-        {children}
+      {props.books.map(book => (
+          <BookBoxWant
+            key={book._id}
+            showModal={props.showModal}
+            flipModal={props.flipModal}
+            onClick={props.flipModal}
+            populateStars={props.populateStars}
+            title={book.title}
+            author={book.author}
+            completed={book.completed}
+            notes={book.notes}
+            rating={book.rating}
+          />
+        ))}
       </ul>
     </article>
   );

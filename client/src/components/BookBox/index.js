@@ -1,2 +1,2 @@
-export { default } from "./BookBox.js";
+export { default } from "./BookBoxCompleted.js";
 export { default } from "./Stars.js";
