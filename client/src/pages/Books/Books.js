@@ -105,10 +105,10 @@ class Books extends Component {
   removeFavorite = (id, book) => {
     console.log("clicked and id is " + id)
     console.log("book favorite inside removeFAv func is " + book.favorite)
-    book.favorite ? book.favorite = false : book.favorite = true;
+    book.favorite && book.favorite == false;
     console.log("book favorite is now "+ book.favorite)
-    this.updateBookFavorite(id, book);
-    this.loadBooks();
+    //this.updateBookFavorite(id, book);
+    this.updateBook(id);
   }
 
   populateStars = (rating) => {
@@ -129,12 +129,12 @@ class Books extends Component {
     .catch(err => console.log(err));
   }
 
-  updateBookFavorite = (id, book) => {
-    console.log("book object's fav prop inside React updateBookFavorite func = " + book.favorite)
-    API.updateBookFavorite(id, book)
-    .then(res => this.loadBooks())
-    .catch(err => console.log(err));
-  }
+  // updateBookFavorite = (id, book) => {
+  //   console.log("book object's fav prop inside React updateBookFavorite func = " + book.favorite)
+  //   API.updateBook(id, book)
+  //   // .then(res => this.loadBooks())
+  //   .catch(err => console.log(err));
+  // }
 
   deleteBook = id => {
     API.deleteBook(id)
@@ -172,7 +172,7 @@ class Books extends Component {
                     flipModal={this.flipModal}
                     books={this.state.books}
                     populateStars={(rating) => this.populateStars(rating)}
-                    removeFavorite={(id, book) => this.removeFavorite(id, book)}
+                    removeFavorite={this.removeFavorite}
                   />
                 </div>
                 <div className="tile is-parent">
