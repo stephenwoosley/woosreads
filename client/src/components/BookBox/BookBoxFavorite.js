@@ -18,9 +18,9 @@ const BookBoxFavorite = props =>
             className="un-bookmark is-small"
             onClick={props.removeFavorite(props._id, props.book)}
           >
-          <span className="un-bookmark-span icon is-small is-left">
-            <i className="fa fa-bookmark"></i>
-          </span>
+            <span className="un-bookmark-span icon is-small is-left">
+              <i className="fa fa-bookmark"></i>
+            </span>
           </a>
         </div>
         <div>
