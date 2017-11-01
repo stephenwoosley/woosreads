@@ -82,37 +82,16 @@ class Books extends Component {
     this.setState({
       [name]: value
     });
-
-
-    // if(this.state.category == "") {
-    //   this.setState({showExtraFields:false})
-    //   // this.setState({categorySwitch:"Want to Read"})
-    // }
-    // else if(this.state.category == "Want to Read") {
-    //   this.setState({showExtraFields:false})
-    //   // this.setState({categorySwitch:"Finished Reading"})
-    // }
-    // else if(this.state.category == "Finished Reading") {
-    //   this.setState({showExtraFields:true})
-    //   // this.setState({categorySwitch:"Want to Read"})
-    // }
-    // {this.state.category=="Want to Read" && this.setState({categorySwitch:"Finished Reading"})
-    // }
-    // {this.state.category=="Finished Reading" && this.setState({categorySwitch:"Want to Read"})
-    // }
   }
 
   removeFavorite = (id, book) => {
-    // console.log("clicked and id is " + id)
-    // console.log("book favorite inside removeFAv func is " + book.favorite)
+    // console.log("removeFavorite ID = " + id)
+    // console.log("removeFavorite Book.Favorite = " + book.favorite)
     if(book.favorite===true) {
-      book.favorite===false;
-      this.updateBook(id, book.favorite);
+      book.favorite = false;
+      // console.log("removeFavorite Book.Favorite after if statement = "+ book.favorite)
+      this.updateBook(id, book);
     }
-    // book.favorite && book.favorite == false;
-    //console.log("book favorite is now "+ book.favorite)
-    //this.updateBookFavorite(id, book);
-    
   }
 
   populateStars = (rating) => {
@@ -126,9 +105,9 @@ class Books extends Component {
     })
   }
 
-  updateBook = (id, bookFavorite) => {
-    // console.log("HIT UPDATE BOOK FUNCTION with "+ id + " as ID")
-    API.updateBook(id, bookFavorite)
+  updateBook = (id, book) => {
+    console.log("updateBook's bookFavorite is "+ book.favorite)
+    API.updateBook(id, book)
     .then(res => this.loadBooks())
     .catch(err => console.log(err));
   }

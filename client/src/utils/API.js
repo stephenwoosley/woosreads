@@ -17,12 +17,11 @@ export default {
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
   },
-  updateBook: function(id, body) {
-    console.log("reached axios.updateBook");
-    return axios.put("/api/books/" + id, body);
+  updateBook: function(id, book) {
+    console.log("API got " + book.favorite + " as the favorite and " + id + " as the id");
+    return axios.put("/api/books/" + id, book);
   },
   updateBookFavorite: function(id, body) {
-    console.log("reached axios.updateFavorite");
     return axios.put("/api/books/" + id, body);
   }
 };
