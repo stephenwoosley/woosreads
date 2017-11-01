@@ -72,7 +72,7 @@ class Books extends Component {
 
   flipModal = e => {
     e.preventDefault()
-    console.log("flipping click working in flipModal")
+    // console.log("flipping click working in flipModal")
     {!this.state.showModal && this.setState({showModal:true})}
   }
 
@@ -103,12 +103,16 @@ class Books extends Component {
   }
 
   removeFavorite = (id, book) => {
-    console.log("clicked and id is " + id)
-    console.log("book favorite inside removeFAv func is " + book.favorite)
-    book.favorite && book.favorite == false;
-    console.log("book favorite is now "+ book.favorite)
+    // console.log("clicked and id is " + id)
+    // console.log("book favorite inside removeFAv func is " + book.favorite)
+    if(book.favorite===true) {
+      book.favorite===false;
+      this.updateBook(id, book.favorite);
+    }
+    // book.favorite && book.favorite == false;
+    //console.log("book favorite is now "+ book.favorite)
     //this.updateBookFavorite(id, book);
-    this.updateBook(id);
+    
   }
 
   populateStars = (rating) => {
@@ -116,15 +120,15 @@ class Books extends Component {
     for (let i = 0; i < rating; i++) {
       ratingArray.push(i);
     }
-    console.log(`rating array is ${ratingArray.length} items long.`)
+    // console.log(`rating array is ${ratingArray.length} items long.`)
     return ratingArray.map(rating => {
         return <Star/>
     })
   }
 
-  updateBook = (id) => {
-    console.log("bookFavorite inside React updateBook func = ")
-    API.updateBook(id)
+  updateBook = (id, bookFavorite) => {
+    // console.log("HIT UPDATE BOOK FUNCTION with "+ id + " as ID")
+    API.updateBook(id, bookFavorite)
     .then(res => this.loadBooks())
     .catch(err => console.log(err));
   }
