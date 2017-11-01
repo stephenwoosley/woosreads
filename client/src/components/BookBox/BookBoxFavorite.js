@@ -3,8 +3,10 @@ import moment from "moment";
 import './BookBox.css';
 
 const BookBoxFavorite = props =>
-
+  
   <li>
+  {/* {console.log("props.book.title inside BookBoxFavorite = " + props.book.title)}
+  {console.log("props.book.id inside BookBoxFavorite = " + props.book._id)} */}
     <div className="box">
         {/* {props.children} */}
         <div className="deleteContainer">
@@ -16,7 +18,7 @@ const BookBoxFavorite = props =>
           </span>
           <a 
             className="un-bookmark is-small"
-            onClick={props.removeFavorite(props._id, props.book)}
+            onClick={(id, book) => props.removeFavorite(props.book._id, props.book)}
           >
             <span className="un-bookmark-span icon is-small is-left">
               <i className="fa fa-bookmark"></i>
