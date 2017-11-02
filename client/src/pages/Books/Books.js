@@ -70,12 +70,16 @@ class Books extends Component {
     
   }
 
-  flipModal = e => {
-    e.preventDefault()
-    // console.log("flipping click working in flipModal")
-    {!this.state.showModal && this.setState({showModal:true})}
+  flipModal = () => {
+    //console.log("showModal BEFORE flipModal activates: " + this.state.showModal)
+    if(this.state.showModal===false) {
+      this.setState({showModal:true})
+    }
+    else {
+      this.setState({showModal:false})
+    }
+    // console.log("showModal AFTER flipModal activates: " + this.state.showModal)
   }
-
 
   flipCategorySwitch = event => {
     const { name, value } = event.target;
@@ -85,11 +89,8 @@ class Books extends Component {
   }
 
   removeFavorite = (id, book) => {
-    // console.log("removeFavorite ID = " + id)
-    // console.log("removeFavorite Book.Favorite = " + book.favorite)
     if(book.favorite===true) {
       book.favorite = false;
-      // console.log("removeFavorite Book.Favorite after if statement = "+ book.favorite)
       this.updateBook(id, book);
     }
   }
@@ -99,25 +100,16 @@ class Books extends Component {
     for (let i = 0; i < rating; i++) {
       ratingArray.push(i);
     }
-    // console.log(`rating array is ${ratingArray.length} items long.`)
     return ratingArray.map(rating => {
         return <Star/>
     })
   }
 
   updateBook = (id, book) => {
-    console.log("updateBook's bookFavorite is "+ book.favorite)
     API.updateBook(id, book)
     .then(res => this.loadBooks())
     .catch(err => console.log(err));
   }
-
-  // updateBookFavorite = (id, book) => {
-  //   console.log("book object's fav prop inside React updateBookFavorite func = " + book.favorite)
-  //   API.updateBook(id, book)
-  //   // .then(res => this.loadBooks())
-  //   .catch(err => console.log(err));
-  // }
 
   deleteBook = id => {
     API.deleteBook(id)
@@ -131,17 +123,19 @@ class Books extends Component {
         <div className="container is-fluid">
           {this.state.showModal && 
             <Modal 
-              handleInputChange = {this.handleInputChange}
-              title = {this.state.title}
-              category= {this.state.category}
-              author= {this.state.author}
-              rating= {this.state.rating}
-              submit= {this.handleFormSubmit}
-              wantToRead={this.state.wantToRead}
-              flipFavorite= {this.flipFavorite}
+                handleInputChange = {this.handleInputChange}
+                title = {this.state.title}
+                category= {this.state.category}
+                author= {this.state.author}
+                rating= {this.state.rating}
+                submit= {this.handleFormSubmit}
+                wantToRead={this.state.wantToRead}
+                flipFavorite= {this.flipFavorite}
+                showExtraFields={this.state.showExtraFields}
+                flipModal={this.flipModal}
+                showModal={this.state.showModal}
             />
           }
-          
           <div className="tile is-desktop is-ancestor">
             <div className="tile is-vertical is-8">
               <div className="tile">
