@@ -5,7 +5,6 @@ const BookBoxCompleted = props =>
 
   <li>
     <div className="box">
-        {/* {props.children} */}
         <div className="deleteContainer">
           <span className="icon is-small is-left">
             <i className="fa fa-book"></i>
