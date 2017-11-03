@@ -16,14 +16,15 @@ const Completed = (props) => {
           <BookBoxCompleted
             key={book._id}
             showModal={props.showModal}
-            flipModal={props.flipModal}
-            //onClick={() => props.flipModal()}
+            populateModalBook={props.populateModalBook}
             populateStars={props.populateStars}
             title={book.title}
             author={book.author}
             completed={book.completed}
             notes={book.notes}
             rating={book.rating}
+            selectedBook={props.selectedBook}
+            book={book}
           />
         ))}
           {/* {children} */}

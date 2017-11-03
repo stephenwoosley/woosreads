@@ -1,7 +1,7 @@
 import React from 'react';
 import UpdateForm from '../Form/UpdateForm';
-import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek'
-import _ from 'lodash'
+// import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek';
+// import _ from 'lodash';
 
 
 const Modal = props => {
@@ -24,18 +24,14 @@ const Modal = props => {
           </button>
         </header>
         <section className="modal-card-body">
-     
-          {/* <UpdateForm 
-            handleInputChange = {props.handleInputChange}
-            title = {props.title}
-            category= {props.category}
-            author= {props.author}
-            rating= {props.rating}
-            submit= {props.handleFormSubmit}
-            wantToRead={props.wantToRead}
-            flipFavorite= {props.flipFavorite}
-            showExtraFields={props.showExtraFields}
-          /> */}
+          <h2>Title:{props.selectedBook.title}</h2>
+          <h2>Author:{props.selectedBook.author}</h2>
+          <h2>Category:{props.selectedBook.category}</h2>
+          <h2>Favorite:{props.selectedBook.favorite}</h2>
+          <h2>WantToRead:{props.selectedBook.wantToRead}</h2>
+          <h2>Rating:{props.selectedBook.rating}</h2>
+          <h2>Note:{props.selectedBook.note}</h2>
+          <h2>Date:{props.selectedBook.date}</h2>
         </section>
         <footer className="modal-card-foot">
           <button className="button is-success">Save changes</button>
