@@ -25,7 +25,17 @@ class Books extends Component {
     currentRatingArr: [],
     categorySwitch: "",
     showExtraFields: false,
-    showModal: false
+    showModal: false,
+    selectedBook: {
+      title: "title",
+      author: "author",
+      category: "category",
+      rating: 5,
+      notes: "notes go here",
+      favorite: false,
+      wantToRead: false,
+      date: Date.now()
+    }
   };
 
   componentDidMount() {
@@ -69,16 +79,33 @@ class Books extends Component {
       : this.setState({favorite:true})
     
   }
-
+//should take in an object, which will be populated with data from the completed bookbox
   flipModal = () => {
-    //console.log("showModal BEFORE flipModal activates: " + this.state.showModal)
     if(this.state.showModal===false) {
       this.setState({showModal:true})
     }
     else {
       this.setState({showModal:false})
     }
-    // console.log("showModal AFTER flipModal activates: " + this.state.showModal)
+  }
+
+  populateModalBook = (bookToRender) => {
+
+    let selectedBook = {...this.state.selectedBook};
+
+    selectedBook.title = bookToRender.title;
+    selectedBook.author = bookToRender.author;
+    selectedBook.category = bookToRender.category;
+    selectedBook.rating = bookToRender.rating;
+    selectedBook.favorite = bookToRender.favorite;
+    selectedBook.note = bookToRender.note;
+    selectedBook.date = bookToRender.date;
+    selectedBook.wantToRead = bookToRender.wantToRead;
+
+    this.setState({selectedBook: selectedBook})
+   
+    this.flipModal();
+
   }
 
   flipCategorySwitch = event => {
@@ -133,6 +160,7 @@ class Books extends Component {
                 flipFavorite= {this.flipFavorite}
                 showExtraFields={this.state.showExtraFields}
                 flipModal={this.flipModal}
+                selectedBook={this.state.selectedBook}
                 showModal={this.state.showModal}
             />
           }
@@ -146,7 +174,7 @@ class Books extends Component {
                   />
                   <Favorites 
                     showModal={this.state.showModal}
-                    flipModal={this.flipModal}
+                    populateModalBook={this.populateModalBook}
                     books={this.state.books}
                     populateStars={(rating) => this.populateStars(rating)}
                     removeFavorite={this.removeFavorite}
@@ -156,7 +184,7 @@ class Books extends Component {
                   <WantToRead 
                     books={this.state.books}
                     showModal={this.state.showModal}
-                    flipModal={this.flipModal}
+                    populateModalBook={this.populateModalBook}
                   />
                 </div>
               </div>
@@ -185,8 +213,9 @@ class Books extends Component {
             <div className="tile is-parent">
               <Completed
                 showModal={this.state.showModal}
-                flipModal={this.flipModal}
+                populateModalBook={this.populateModalBook}
                 books={this.state.books}
+                selectedBook={this.state.selectedBook}
                 //{function(rating){
                   //return this.populateStars(rating)
                 //}}

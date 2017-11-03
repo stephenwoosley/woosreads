@@ -4,7 +4,7 @@ import './BookBox.css';
 
 const BookBoxCompleted = props =>
   <li
-    onClick={() => props.flipModal()}
+    onClick={() => props.populateModalBook(props.book)}
   >
     <div className="box">
         {/* {props.children} */}
