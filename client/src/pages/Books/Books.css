@@ -2,6 +2,16 @@
   margin-left: 15px;
 }
 
+.bold-modal-title {
+  font-weight: bold;
+  margin-right: 10px;
+  line-height: 2.25;
+}
+
+/* .is-parent .is-child {
+  margin: 0 5px 0 5px;
+} */
+
  .g-image {
   border-radius: 5%;
 } 
@@ -20,6 +30,10 @@
 
 .box {
   margin-bottom: .25rem
+}
+
+.title {
+  padding-left: 5px;
 }
 
 .un-bookmark.is-small, .delete.is-small{

@@ -13,7 +13,7 @@ const BookBoxFavorite = props =>
             <i className="fa fa-book"></i>
           </span>
           <span className="bookbox-title">
-            <strong>{props.title}</strong>
+            <strong>{props.book.title}</strong>
           </span>
           <a 
             className="un-bookmark is-small"
@@ -29,21 +29,21 @@ const BookBoxFavorite = props =>
             <i className="fa fa-user"></i>
           </span>
           <span className="bookbox-title">
-            <i>{props.author}</i>
+            <i>{props.book.author}</i>
           </span>
         </div>
         <div className="level is-mobile">
           <div className="level-left">
             <div className="level-item has-text-centered is-size-7">
               <div>
-                {this.populateStars}
+                {props.populateStars(props.book.rating)}
               </div>
             </div>
           </div>
           <div className="level-right">
             <div className="level-item has-text-centered is-size-7">
               <div>
-                <span>{moment(props.dateCompleted).format("MM.DD.YY")}</span>
+                <span>{moment(props.book.dateCompleted).format("MM.DD.YY")}</span>
               </div>
             </div>
           </div>
