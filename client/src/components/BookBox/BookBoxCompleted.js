@@ -36,7 +36,7 @@ const BookBoxCompleted = props =>
                 <div className="level-right">
                   <div className="level-item has-text-centered is-size-7">
                     <div>
-                      <span>{moment(props.dateCompleted).format("MM.DD.YY")}</span>
+                      <span>{moment(props.date).format("MM.DD.YY")}</span>
                     </div>
                   </div>
                 </div>

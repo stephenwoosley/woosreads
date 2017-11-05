@@ -60,3 +60,6 @@ h1 { font-size: 1.5em; margin: 10px; } */
 .favorite > input:checked ~ label:hover,
 .favorite > label:hover ~ input:checked ~ label, /* lighten current selection */
 .favorite > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+
+

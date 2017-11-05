@@ -70,8 +70,8 @@ const Form = props =>
                   onChange={props.flipCategorySwitch}
                   name="category"
                 >
-                <option></option>
-                <option value="Finished Reading">Finished Reading</option>
+                  <option value="Choose Category">Choose Category</option>
+                  <option value="Finished Reading">Finished Reading</option>
                   <option value="Want to Read">Want to Read</option>
                 </select>
               </div>
@@ -81,49 +81,48 @@ const Form = props =>
       </div>
 
       {/* Conditional Fields */}        
-       { props.categorySwitch === ""
-        ? <Submit 
-            author={props.author}
-            title={props.title}
-            category={props.category}
-            rating={props.rating}
-            submit={props.submit}
-          />
-        : (props.categorySwitch === "Finished Reading"
-            ? <div>
-                <Rating 
-                  rating={props.rating}
-                  handleInputChange={this.handleInputChange}
-                />
-                <Favorite 
-                  favorite={props.favorite}
-                  handleInputChange={props.handleInputChange}
-                  flipFavorite={props.flipFavorite}
-                />
-                <Notes 
-                  notes={props.notes}
-                  handleInputChange={props.handleInputChange}
-                />
-                <Submit 
-                  author={props.author}
-                  title={props.title}
-                  category={props.category}
-                  rating={props.rating}
-                  submit={props.submit}
-                />
-              </div>
-            
-            : <Submit 
-                author={props.author}
-                title={props.title}
-                category={props.category}
-                rating={props.rating}
-                submit={props.submit}
-              />
-          )
-      }
-      
-    </form>
+      { (() => {
+          switch(props.categorySwitch) {
 
+              case 'Choose Category':
+                  return  <Submit />;
+
+              case 'Finished Reading':
+                  return  <div>
+                            <Rating 
+                              rating={props.rating}
+                              handleInputChange={props.handleInputChange}
+                            />
+                            <Favorite 
+                              favorite={props.favorite}
+                              handleInputChange={props.handleInputChange}
+                              flipFavorite={props.flipFavorite}
+                            />
+                            <Notes 
+                              notes={props.notes}
+                              handleInputChange={props.handleInputChange}
+                            />
+                            <Submit 
+                              author={props.author}
+                              title={props.title}
+                              category={props.category}
+                              submit={props.submit}
+                            />
+                          </div>;
+
+              case 'Want to Read':
+                  return  <Submit 
+                            author={props.author}
+                            title={props.title}
+                            category={props.category}
+                            rating={props.rating}
+                            submit={props.submit}
+                          />;
+              default:
+                  return null;
+          }
+        })()
+      }
+    </form>
 
 export default Form;

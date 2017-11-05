@@ -23,8 +23,7 @@ class Books extends Component {
     wantToRead: false,
     date: Date.now(),
     currentRatingArr: [],
-    categorySwitch: "",
-    showExtraFields: false,
+    categorySwitch: "Choose Category",
     showModal: false,
     selectedBook: {
       title: "title",
@@ -39,27 +38,38 @@ class Books extends Component {
   };
 
   componentDidMount() {
+
     this.loadBooks();
+
   }
 
   loadBooks = () => {
+
     API.getBooks()
       // .then(res => console.log(res.data[0]))
       .then(res =>
-        this.setState({ books: res.data, title: "", category: "", author: "", rating:0, notes: "", favorite: false })
+        this.setState({ books: res.data, title: "", category: "", author: "", rating:0, notes: "", favorite: false, date: Date.now() })
       )
       .catch(err => console.log(err))
+
   };
 
   handleInputChange = event => {
+
     const { name, value } = event.target;
+
     this.setState({
       [name]: value
     });
+
   };
 
   handleFormSubmit = event => {
+
     event.preventDefault();
+
+    this.setState({date:Date.now()})
+
     API.saveBook({
       title: this.state.title,
       author: this.state.author,
@@ -70,23 +80,29 @@ class Books extends Component {
     })
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
+
   };
 
   flipFavorite = e => {
+
     e.preventDefault()
+
     this.state.favorite
       ? this.setState({favorite:false})
       : this.setState({favorite:true})
     
   }
-//should take in an object, which will be populated with data from the completed bookbox
+
   flipModal = () => {
+
     if(this.state.showModal===false) {
       this.setState({showModal:true})
     }
+
     else {
       this.setState({showModal:false})
     }
+
   }
 
   populateModalBook = (bookToRender) => {
@@ -103,45 +119,59 @@ class Books extends Component {
     selectedBook.wantToRead = bookToRender.wantToRead;
 
     this.setState({selectedBook: selectedBook})
-   
     this.flipModal();
 
   }
 
   flipCategorySwitch = event => {
+
     const { name, value } = event.target;
+
     this.setState({
       [name]: value
     });
+
+    this.setState({categorySwitch:value})
+
   }
 
   removeFavorite = (id, book) => {
+
     if(book.favorite===true) {
       book.favorite = false;
       this.updateBook(id, book);
     }
+
   }
 
   populateStars = (rating) => {
-    let ratingArray = []
+
+    let ratingArray = [];
+
     for (let i = 0; i < rating; i++) {
       ratingArray.push(i);
     }
+
     return ratingArray.map(rating => {
         return <Star/>
     })
+
   }
 
   updateBook = (id, book) => {
+
     API.updateBook(id, book)
     .then(res => this.loadBooks())
     .catch(err => console.log(err));
+
   }
 
   deleteBook = id => {
+
     API.deleteBook(id)
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
+
   };
 
   render() {
@@ -158,10 +188,10 @@ class Books extends Component {
                 submit= {this.handleFormSubmit}
                 wantToRead={this.state.wantToRead}
                 flipFavorite= {this.flipFavorite}
-                showExtraFields={this.state.showExtraFields}
                 flipModal={this.flipModal}
                 selectedBook={this.state.selectedBook}
                 showModal={this.state.showModal}
+                notes={this.state.notes}
             />
           }
           <div className="tile is-desktop is-ancestor">
@@ -202,10 +232,14 @@ class Books extends Component {
                     category= {this.state.category}
                     author= {this.state.author}
                     rating= {this.state.rating}
+                    favorite={this.state.favorite}
                     submit= {this.handleFormSubmit}
+                    date={this.state.date}
                     wantToRead={this.state.wantToRead}
                     flipFavorite= {this.flipFavorite}
-                    showExtraFields={this.state.showExtraFields}
+                    flipCategorySwitch={this.flipCategorySwitch}
+                    categorySwitch={this.state.categorySwitch}
+                    notes={this.state.notes}
                   />
                 </article>
               </div>

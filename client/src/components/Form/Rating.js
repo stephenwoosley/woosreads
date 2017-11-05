@@ -9,21 +9,70 @@ const Rating = props => {
         <div className="field-body">
           <div className="field has-addons has-addons-left">
             <fieldset 
-              className="rating" 
-              name="rating"
+              className="rating"
               value={props.rating}
               onChange={props.handleInputChange}
             >
-              <input type="radio" id="star5" name="rating" value="5" /><label className = "full" htmlFor="star5" title="Awesome!"></label>
-              {/* <input type="radio" id="star4half" name="rating" value="4.5" /><label className="half" htmlFor="star4half" title="Great!"></label> */}
-              <input type="radio" id="star4" name="rating" value="4" /><label className = "full" htmlFor="star4" title="Pretty Good!"></label>
-              {/* <input type="radio" id="star3half" name="rating" value="3.5" /><label className="half" htmlFor="star3half" title="It Was Decent."></label> */}
-              <input type="radio" id="star3" name="rating" value="3" /><label className = "full" htmlFor="star3" title="It Was OK."></label>
-              {/* <input type="radio" id="star2half" name="rating" value="2.5" /><label className="half" htmlFor="star2half" title="Not Great."></label> */}
-              <input type="radio" id="star2" name="rating" value="2" /><label className = "full" htmlFor="star2" title="Kinda Bad."></label>
-              {/* <input type="radio" id="star1half" name="rating" value="1.5" /><label className="half" htmlFor="star1half" title="Not Good."></label> */}
-              <input type="radio" id="star1" name="rating" value="1" /><label className = "full" htmlFor="star1" title="Not Good At All."></label>
-              {/* <input type="radio" id="starhalf" name="rating" value="0.5" /><label className="half" htmlFor="starhalf" title="Very Bad!"></label> */}
+              <input 
+                type="radio" 
+                id="star5" 
+                name="rating" 
+                value={5}
+              />
+              <label 
+                className="full" 
+                htmlFor="star5" 
+                title="Awesome!"
+              />
+            
+              <input 
+                type="radio" 
+                id="star4" 
+                name="rating" 
+                value={4}
+              />
+              <label 
+                className="full" 
+                htmlFor="star4" 
+                title="Pretty Good!"
+              />
+              
+              <input 
+                type="radio" 
+                id="star3" 
+                name="rating" 
+                value={3}
+              />
+              <label 
+                className="full" 
+                htmlFor="star3" 
+                title="It Was OK."
+              />
+              
+              <input 
+                type="radio" 
+                id="star2" 
+                name="rating" 
+                value={2} 
+              />
+              <label 
+                className="full" 
+                htmlFor="star2" 
+                title="Kinda Bad."
+              />
+              
+              <input 
+                type="radio" 
+                id="star1" 
+                name="rating" 
+                value={1} 
+              />
+              <label 
+                className="full" 
+                htmlFor="star1" 
+                title="Not Good At All."
+              />
+              
             </fieldset>
           </div>
         </div>
