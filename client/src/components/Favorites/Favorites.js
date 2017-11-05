@@ -19,9 +19,7 @@ const Favorites = (props) => {
           }).map( book => 
             <BookBoxFavorite 
               key={book._id}
-              showModal={props.showModal}
-              flipModal={props.flipModal}
-              onClick={props.flipModal}
+              populateModalBook={props.populateModalBook}
               populateStars={props.populateStars}
               title={book.title}
               author={book.author}

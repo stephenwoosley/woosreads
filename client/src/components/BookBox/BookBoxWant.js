@@ -3,7 +3,9 @@ import './BookBox.css';
 
 const BookBoxCompleted = props =>
 
-  <li>
+  <li
+    onClick={() => props.populateModalBook(props.book)}
+  >
     <div className="box">
         <div className="deleteContainer">
           <span className="icon is-small is-left">

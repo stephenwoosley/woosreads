@@ -15,7 +15,6 @@ const Completed = (props) => {
         {props.books.map(book => (
           <BookBoxCompleted
             key={book._id}
-            showModal={props.showModal}
             populateModalBook={props.populateModalBook}
             populateStars={props.populateStars}
             title={book.title}
@@ -23,6 +22,7 @@ const Completed = (props) => {
             completed={book.completed}
             notes={book.notes}
             rating={book.rating}
+            date={book.dateCompleted}
             selectedBook={props.selectedBook}
             book={book}
           />
