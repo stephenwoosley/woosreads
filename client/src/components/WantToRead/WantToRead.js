@@ -11,19 +11,20 @@ const WantToRead = (props) => {
         <span className="tile-title">Want to Read</span>
       </p>
       <ul>
-      {props.books.map(book => (
-          <BookBoxWant
-            key={book._id}
-            populateModalBook={props.populateModalBook}
-            populateStars={props.populateStars}
-            title={book.title}
-            author={book.author}
-            completed={book.completed}
-            notes={book.notes}
-            rating={book.rating}
-            book={book}
-          />
-        ))}
+      {props.books.filter(book => {
+        return book.wantToRead;
+      }).map( book => 
+        <BookBoxWant 
+          key={book._id}
+          populateModalBook={props.populateModalBook}
+          title={book.title}
+          author={book.author}
+          completed={book.completed}
+          notes={book.notes}
+          rating={book.rating}
+          book={book}
+        />
+      )} 
       </ul>
     </article>
   );

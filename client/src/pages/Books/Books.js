@@ -25,7 +25,9 @@ class Books extends Component {
     currentRatingArr: [],
     categorySwitch: "Choose Category",
     showModal: false,
+    showAlert: false,
     selectedBook: {
+      id: 0,
       title: "title",
       author: "author",
       category: "category",
@@ -48,7 +50,7 @@ class Books extends Component {
     API.getBooks()
       // .then(res => console.log(res.data[0]))
       .then(res =>
-        this.setState({ books: res.data, title: "", category: "", author: "", rating:0, notes: "", favorite: false, date: Date.now() })
+        this.setState({ books: res.data, title: "", category: "Choose Category", author: "", rating:0, notes: "", favorite: false, date: Date.now() })
       )
       .catch(err => console.log(err))
 
@@ -105,17 +107,32 @@ class Books extends Component {
 
   }
 
+  flipAlert = () => {
+    
+    if(this.state.showAlert===false) {
+      this.setState({showAlert:true})
+    }
+
+    else {
+      this.setState({showAlert:false})
+    }
+
+  }
+
   populateModalBook = (bookToRender) => {
+
+    console.log(bookToRender)
 
     let selectedBook = {...this.state.selectedBook};
 
+    selectedBook.id = bookToRender._id;
     selectedBook.title = bookToRender.title;
     selectedBook.author = bookToRender.author;
     selectedBook.category = bookToRender.category;
     selectedBook.rating = bookToRender.rating;
     selectedBook.favorite = bookToRender.favorite;
     selectedBook.note = bookToRender.note;
-    selectedBook.date = bookToRender.date;
+    selectedBook.date = bookToRender.dateCompleted;
     selectedBook.wantToRead = bookToRender.wantToRead;
 
     this.setState({selectedBook: selectedBook})
@@ -167,11 +184,11 @@ class Books extends Component {
   }
 
   deleteBook = id => {
-
+    console.log("book id inside deleteBook is " + id)
     API.deleteBook(id)
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
-
+    this.flipModal();
   };
 
   render() {
@@ -180,82 +197,84 @@ class Books extends Component {
         <div className="container is-fluid">
           {this.state.showModal && 
             <Modal 
-                handleInputChange = {this.handleInputChange}
-                title = {this.state.title}
-                category= {this.state.category}
-                author= {this.state.author}
-                rating= {this.state.rating}
-                submit= {this.handleFormSubmit}
+                handleInputChange={this.handleInputChange}
+                title ={this.state.title}
+                category={this.state.category}
+                author={this.state.author}
+                rating={this.state.rating}
+                submit={this.handleFormSubmit}
                 wantToRead={this.state.wantToRead}
-                flipFavorite= {this.flipFavorite}
+                flipFavorite={this.flipFavorite}
+                showModal={this.state.showModal}
                 flipModal={this.flipModal}
                 selectedBook={this.state.selectedBook}
-                showModal={this.state.showModal}
                 notes={this.state.notes}
+                deleteBook={this.deleteBook}
+                showAlert={this.showAlert}
+                flipAlert={this.flipAlert}
             />
           }
           <div className="tile is-desktop is-ancestor">
-            <div className="tile is-vertical is-8">
-              <div className="tile">
-                <div className="tile is-parent is-vertical">
+            <div className="tile is-vertical">
+              <div className="tile is-12">
+                <div className="tile is-parent is-4">
                   <Profile 
                     date={this.state.date}
                     bookCount={this.state.books.length}
                   />
-                  <Favorites 
-                    showModal={this.state.showModal}
-                    populateModalBook={this.populateModalBook}
-                    books={this.state.books}
-                    populateStars={(rating) => this.populateStars(rating)}
-                    removeFavorite={this.removeFavorite}
-                  />
-                </div>
-                <div className="tile is-parent">
-                  <WantToRead 
-                    books={this.state.books}
-                    showModal={this.state.showModal}
-                    populateModalBook={this.populateModalBook}
-                  />
+                </div> 
+                <div className="tile is-parent is-8">
+                  <article className="tile is-child notification is-danger">
+                    <p className="title has-icons-left">
+                      <span className="icon is-small is-left">
+                        <i className="fa fa-book"></i>
+                      </span>
+                      <span className="tile-title">Add a Book</span>
+                    </p>
+                    <Form 
+                      handleInputChange = {this.handleInputChange}
+                      title = {this.state.title}
+                      category= {this.state.category}
+                      author= {this.state.author}
+                      rating= {this.state.rating}
+                      favorite={this.state.favorite}
+                      submit= {this.handleFormSubmit}
+                      date={this.state.date}
+                      wantToRead={this.state.wantToRead}
+                      flipFavorite= {this.flipFavorite}
+                      flipCategorySwitch={this.flipCategorySwitch}
+                      categorySwitch={this.state.categorySwitch}
+                      notes={this.state.notes}
+                    />
+                  </article>
                 </div>
               </div>
-              <div className="tile is-parent">
-                <article className="tile is-child notification is-danger">
-                  <p className="title has-icons-left">
-                    <span className="icon is-small is-left">
-                      <i className="fa fa-book"></i>
-                    </span>
-                    <span className="tile-title">Add a Book</span>
-                  </p>
-                  <Form 
-                    handleInputChange = {this.handleInputChange}
-                    title = {this.state.title}
-                    category= {this.state.category}
-                    author= {this.state.author}
-                    rating= {this.state.rating}
-                    favorite={this.state.favorite}
-                    submit= {this.handleFormSubmit}
-                    date={this.state.date}
-                    wantToRead={this.state.wantToRead}
-                    flipFavorite= {this.flipFavorite}
-                    flipCategorySwitch={this.flipCategorySwitch}
-                    categorySwitch={this.state.categorySwitch}
-                    notes={this.state.notes}
-                  />
-                </article>
-              </div>
-            </div> 
-            <div className="tile is-parent">
-              <Completed
-                showModal={this.state.showModal}
-                populateModalBook={this.populateModalBook}
-                books={this.state.books}
-                selectedBook={this.state.selectedBook}
-                //{function(rating){
-                  //return this.populateStars(rating)
-                //}}
-                populateStars={(rating) => this.populateStars(rating)}
-              />
-            </div>{ /* end tile is-parent */}
+              <div className="tile is-parent is-12">
+                <Favorites 
+                  showModal={this.state.showModal}
+                  populateModalBook={this.populateModalBook}
+                  books={this.state.books}
+                  removeFavorite={this.removeFavorite}
+                  selectedBook={this.state.selectedBook}
+                  populateStars={(rating) => this.populateStars(rating)}
+                />
+                <Completed
+                  showModal={this.state.showModal}
+                  populateModalBook={this.populateModalBook}
+                  books={this.state.books}
+                  selectedBook={this.state.selectedBook}
+                  //{function(rating){
+                    //return this.populateStars(rating)
+                  //}}
+                  populateStars={(rating) => this.populateStars(rating)}
+                />
+                <WantToRead 
+                  books={this.state.books}
+                  showModal={this.state.showModal}
+                  populateModalBook={this.populateModalBook}
+                />
+            </div>
+          </div>
           </div> {/* end tile is-ancestor */}
         </div>  {/* end container-is-fluid */}
       </section>

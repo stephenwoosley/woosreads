@@ -10,6 +10,13 @@ h1 { font-size: 1.5em; margin: 10px; } */
   border: none;
 }
 
+.scroll-this {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 100px;
+    max-height: 80%;
+}
+
 .rating > input, .favorite > input { display: none; } 
 .rating > label:before { 
   margin: 5px;

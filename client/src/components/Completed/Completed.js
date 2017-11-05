@@ -4,7 +4,7 @@ import BookBoxCompleted from "../BookBox/BookBoxCompleted";
 const Completed = (props) => {
   return(
     <article className="tile is-child notification is-success">
-      <div className="content">
+      <div className="content scroll-this">
         <p className="title">
           <span className="icon is-small is-left">
             <i className="fa fa-check"></i>
@@ -17,12 +17,6 @@ const Completed = (props) => {
             key={book._id}
             populateModalBook={props.populateModalBook}
             populateStars={props.populateStars}
-            title={book.title}
-            author={book.author}
-            completed={book.completed}
-            notes={book.notes}
-            rating={book.rating}
-            date={book.dateCompleted}
             selectedBook={props.selectedBook}
             book={book}
           />

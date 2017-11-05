@@ -21,12 +21,8 @@ const Favorites = (props) => {
               key={book._id}
               populateModalBook={props.populateModalBook}
               populateStars={props.populateStars}
-              title={book.title}
-              author={book.author}
-              completed={book.completed}
-              notes={book.notes}
-              rating={book.rating}
               book={book}
+              selectedBook={props.selectedBook}
               removeFavorite={props.removeFavorite}
             />
           )} 
