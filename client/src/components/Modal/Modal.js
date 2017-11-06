@@ -1,7 +1,6 @@
 import React from 'react';
 import UpdateForm from '../Form/UpdateForm';
 import moment from 'moment';
-import Alert from '../Alert/Alert';
 // import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek';
 // import _ from 'lodash';
 
@@ -9,13 +8,6 @@ import Alert from '../Alert/Alert';
 const Modal = props => {
   return(
     <div className="modal is-active">
-      {props.showAlert && 
-        <Alert 
-          showAlert={props.showAlert}
-          selectedBook={props.selectedBook}
-          deleteBook={props.deleteBook}
-        />
-      }
       <div 
         className="modal-background"
         onClick={() => props.flipModal()}

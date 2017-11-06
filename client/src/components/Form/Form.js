@@ -115,7 +115,6 @@ const Form = props =>
                             author={props.author}
                             title={props.title}
                             category={props.category}
-                            rating={props.rating}
                             submit={props.submit}
                           />;
               default:
