@@ -12,7 +12,9 @@ const Completed = (props) => {
           <span className="tile-title">Completed</span>
         </p>
         <ul>
-        {props.books.map(book => (
+        {props.books.filter(book => {
+          return book.dateCompleted != "1970-01-01T00:00:00.000Z";
+         }).map( book =>
           <BookBoxCompleted
             key={book._id}
             populateModalBook={props.populateModalBook}
@@ -20,8 +22,7 @@ const Completed = (props) => {
             selectedBook={props.selectedBook}
             book={book}
           />
-        ))}
-          {/* {children} */}
+        )}
         </ul>
       </div>
     </article>

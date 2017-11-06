@@ -21,7 +21,7 @@ class Books extends Component {
     notes: "",
     favorite: false,
     wantToRead: false,
-    date: Date.now(),
+    date: 0,
     currentRatingArr: [],
     categorySwitch: "Choose Category",
     showModal: false,
@@ -35,7 +35,7 @@ class Books extends Component {
       notes: "notes go here",
       favorite: false,
       wantToRead: false,
-      date: Date.now()
+      date: 0
     }
   };
 
@@ -50,7 +50,7 @@ class Books extends Component {
     API.getBooks()
       // .then(res => console.log(res.data[0]))
       .then(res =>
-        this.setState({ books: res.data, title: "", category: "Choose Category", author: "", rating:0, notes: "", favorite: false, date: Date.now() })
+        this.setState({ books: res.data, title: "", category: "Choose Category", author: "", rating:0, notes: "", favorite: false, date: 0 })
       )
       .catch(err => console.log(err))
 
@@ -69,9 +69,18 @@ class Books extends Component {
   handleFormSubmit = event => {
 
     event.preventDefault();
+    console.log(this.state.category);
+    console.log(this.state.date);
 
-    this.setState({date:Date.now()})
-
+    if(this.state.category != "Want to Read"){
+      console.log("doesn't equal Want to Read!")
+      this.setState({date:Date.now()})
+    }
+    else {
+      console.log("does equal Want to Read!")
+      console.log(this.state.date)
+    }
+    
     API.saveBook({
       title: this.state.title,
       author: this.state.author,

@@ -1,7 +1,7 @@
 import React from "react";
 import './BookBox.css';
 
-const BookBoxCompleted = props =>
+const BookBoxWant = props =>
 
   <li
     onClick={() => props.populateModalBook(props.book)}
@@ -27,4 +27,4 @@ const BookBoxCompleted = props =>
       </div>
   </li>
 
-export default BookBoxCompleted;
+export default BookBoxWant;
