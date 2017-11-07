@@ -57,7 +57,7 @@ class Books extends Component {
   };
 
   handleInputChange = event => {
-
+ 
     const { name, value } = event.target;
 
     this.setState({
@@ -184,7 +184,17 @@ class Books extends Component {
 
   }
 
+  updateModalBook = (newState) => {
+    
+    this.setState(newState);
+    
+  };
+
   updateBook = (id, book) => {
+
+    console.log("selectedBook state title is " + this.state.selectedBook.title)
+
+    console.log("updateBook has " + id + " as the id and " + book.title + " as the book title.")
 
     API.updateBook(id, book)
     .then(res => this.loadBooks())
@@ -221,6 +231,8 @@ class Books extends Component {
                 deleteBook={this.deleteBook}
                 showAlert={this.showAlert}
                 flipAlert={this.flipAlert}
+                updateBook={this.updateBook}
+                updateModalBook={this.updateModalBook}
             />
           }
           <div className="tile is-desktop is-ancestor">

@@ -1,8 +1,8 @@
 import React from 'react';
 import UpdateForm from '../Form/UpdateForm';
 import moment from 'moment';
-// import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek';
-// import _ from 'lodash';
+import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek';
+import _ from 'lodash';
 
 
 const Modal = props => {
@@ -25,33 +25,39 @@ const Modal = props => {
           </button>
         </header>
         <section className="modal-card-body">
-          <h2>
+          <h1>
             <span className="bold-modal-title">Title:</span> 
-            {props.selectedBook.title + props.selectedBook.id}
-          </h2>
-          <h2>
+            {/* {props.selectedBook.title} */}
+            {/* {console.log("selectedBook title is " + props.selectedBook.title)} */}
+            <RIEInput
+              value={props.selectedBook.title}
+              change={props.updateModalBook}
+              propName='title'
+            />
+          </h1>
+          <h1>
             <span className="bold-modal-title">Author:</span> 
             {props.selectedBook.author}
-          </h2>
-          {/* <h2>Category: {props.selectedBook.category}</h2> */}
-          <h2>
+          </h1>
+          {/* <h1>Category: {props.selectedBook.category}</h1> */}
+          <h1>
             <span className="bold-modal-title">Favorite?</span> {props.selectedBook.favorite===true ? "Yes" : "No"}
-          </h2>
-          {/* <h2>
+          </h1>
+          {/* <h1>
             <span className="bold-modal-title">Want to Read?</span> {props.selectedBook.wantToRead}
-          </h2> */}
-          <h2>
+          </h1> */}
+          <h1>
             <span className="bold-modal-title">Rating:</span> 
             {props.selectedBook.rating}
-          </h2>
-          <h2>
+          </h1>
+          <h1>
             <span className="bold-modal-title">Notes:</span> 
             {props.selectedBook.note}
-          </h2>
-          <h2>
+          </h1>
+          <h1>
             <span className="bold-modal-title">Date Added:</span> 
             {moment(props.selectedBook.dateCompleted).format("MMMM Do, YYYY")}
-          </h2>
+          </h1>
         </section>
         <footer className="modal-card-foot">
           <button 
