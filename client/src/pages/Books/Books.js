@@ -32,7 +32,7 @@ class Books extends Component {
       author: "author",
       category: "category",
       rating: 5,
-      notes: "notes go here",
+      note: "notes go here",
       favorite: false,
       wantToRead: false,
       date: 0
@@ -218,7 +218,6 @@ class Books extends Component {
         <div className="container is-fluid">
           {this.state.showModal && 
             <Modal 
-                handleInputChange={this.handleInputChange}
                 loadBooks={this.loadBooks}
                 submit={this.handleFormSubmit}
                 wantToRead={this.state.wantToRead}
