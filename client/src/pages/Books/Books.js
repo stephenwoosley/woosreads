@@ -187,13 +187,15 @@ class Books extends Component {
   updateModalBook = (newState) => {
     
     this.setState(newState);
+    console.log("updatemomdalbook this.state.selectedBook.title is : " + this.state.selectedBook.title)
+    
     
   };
 
   updateBook = (id, book) => {
 
-    console.log("selectedBook state title is " + this.state.selectedBook.title)
-
+    console.log("selectedBook state title is " + this.state.selectedBook.title);
+    this.flipModal();
     console.log("updateBook has " + id + " as the id and " + book.title + " as the book title.")
 
     API.updateBook(id, book)
@@ -217,20 +219,20 @@ class Books extends Component {
           {this.state.showModal && 
             <Modal 
                 handleInputChange={this.handleInputChange}
-                title ={this.state.title}
-                category={this.state.category}
-                author={this.state.author}
-                rating={this.state.rating}
+                loadBooks={this.loadBooks}
                 submit={this.handleFormSubmit}
                 wantToRead={this.state.wantToRead}
                 flipFavorite={this.flipFavorite}
                 showModal={this.state.showModal}
                 flipModal={this.flipModal}
                 selectedBook={this.state.selectedBook}
-                notes={this.state.notes}
+                selectedTitle={this.state.selectedBook.title}
+                selectedAuthor={this.state.selectedBook.author}
+                selectedRating={this.state.selectedBook.rating}
+                selectedFavorite={this.state.selectedBook.favorite}
+                selectedNote={this.state.selectedBook.note}
+                selectedDate={this.state.selectedBook.date}
                 deleteBook={this.deleteBook}
-                showAlert={this.showAlert}
-                flipAlert={this.flipAlert}
                 updateBook={this.updateBook}
                 updateModalBook={this.updateModalBook}
             />

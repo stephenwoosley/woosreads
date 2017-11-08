@@ -18,7 +18,7 @@ export default {
     return axios.post("/api/books", bookData);
   },
   updateBook: function(id, book) {
-    console.log("API got " + book.favorite + " as the favorite and " + id + " as the id");
+    console.log("API got " + book.author + " as the author and " + id + " as the id");
     return axios.put("/api/books/" + id, book);
   },
   updateBookFavorite: function(id, body) {
