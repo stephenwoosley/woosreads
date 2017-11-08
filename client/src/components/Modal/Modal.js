@@ -2,26 +2,11 @@ import React, {Component} from 'react';
 import UpdateForm from '../Form/UpdateForm';
 import moment from 'moment';
 import API from "../../utils/API";
-// import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek';
-// import _ from 'lodash';
-
-
-// Title: This Book's Title  |E|
-// Author: This Book's Author |E|
-// Rating: This Book's Rating |E|
-
-// When the user clicks |E|, change the text to an input field that holds the text. when enter is pushed, change the value of the state.
-
-// have a flipper for each editable field. 
-// so {!titleEditMode && {this.state.title}}
-// and {titleEditMode && <input blah={blah}> </>}
 
 class Modal extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      text: props.text,
-      handleInputChange: props.handleInputChange,
       title: props.selectedBook.title,
       category: props.category,
       submit: props.submit,
@@ -183,7 +168,7 @@ class Modal extends React.Component {
                     <form>
                       <textarea 
                         className="textarea" 
-                        type="text" 
+                        type="text"
                         name="selectedNote"
                         value={this.state.selectedNote}
                         onChange={this.handleInputChange}
