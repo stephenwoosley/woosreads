@@ -80,7 +80,8 @@ const Form = props =>
         </div>
       </div>
 
-      {/* Conditional Fields */}        
+      {/* Conditional Fields */}  
+            
       { (() => {
           switch(props.categorySwitch) {
 

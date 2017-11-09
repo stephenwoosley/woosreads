@@ -2,11 +2,27 @@ import React, {Component} from 'react';
 import UpdateForm from '../Form/UpdateForm';
 import moment from 'moment';
 import API from "../../utils/API";
+import DatePicker from 'react-date-picker'
+
+// initial state of DATE in books.js = now
+
+// held date inside each bookbox = date entered
+
+// when opening a BOOKBOX, grab that date and display it in the modal DATE field
+
+// when dateEditMode is active, show DATEPICKER with bookbox's date shown
+
+// link DATEPICKER value with state of BOOKBOX's date
+
+
+
+
 
 class Modal extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      date: props.date,
       title: props.selectedBook.title,
       category: props.category,
       submit: props.submit,
@@ -22,6 +38,8 @@ class Modal extends React.Component {
       selectedTitle: props.selectedTitle,
       selectedAuthor: props.selectedAuthor,
       selectedNote: props.selectedNote,
+      selectedFavorite: props.selectedFavorite,
+      selectedDate: props.selectedDate,
       titleEditMode: false,
       authorEditMode: false,
       ratingEditMode: false,
@@ -41,9 +59,9 @@ class Modal extends React.Component {
         book.author = this.state.selectedAuthor
         book.title = this.state.selectedTitle
         book.rating = this.state.selectedRating
-        book.favorite = this.state.favorite
+        book.favorite = this.state.selectedFavorite
         book.note = this.state.selectedNote
-        book.date = this.state.date
+        book.date = this.state.selectedDate
         console.log("updateBook title is " + book.title + " AFTER assignment");
         console.log("updateBook author is " + book.author + " AFTER assignment");
         console.log("updateBook rating is " + book.rating + " AFTER assignment");
@@ -57,17 +75,31 @@ class Modal extends React.Component {
         .then(res => this.state.loadBooks())
         .catch(err => console.log(err));
     
-      }
+  }
 
   handleInputChange = event => {
+
+    console.log("handleInputChange triggered")
     
     const { name, value } = event.target;
-
-    this.setState({
-      [name]: value
-    });
-   
+    if(typeof value === 'string'){
+      value === "yes" && value === true;
+      this.setState({
+        [name]: value
+      });
+    }
+    else {
+      this.setState({
+        [name]: value
+      });
+    }
   };
+
+  onChange = value => {
+    console.log('value is ' + value)
+    this.setState({ selectedDate: value })
+  }
+  
   
 
   render() {
@@ -93,6 +125,31 @@ class Modal extends React.Component {
           {/* Editable Fields */}
 
           <section className="modal-card-body">
+            
+            {/* Date Field */}
+
+            <h1>
+              <span className="bold-modal-title">Date Added:</span> 
+              {moment(this.state.selectedDate).format("MMMM Do, YYYY")}
+              {/* {
+                this.state.dateEditMode
+                  ?
+                  <DatePicker
+                      value={this.state.date}
+                      name="date"
+                      onChange={this.onChange}
+                      className="input"
+                  />
+                  : moment(this.state.selectedDate).format("MMMM Do, YYYY")
+              }
+              <button
+                onClick={() => this.setState({dateEditMode:true})}
+              >
+                <span className="icon is-small is-left">
+                  <i className="fa fa-pencil"></i>
+                </span>
+              </button> */}
+            </h1>
 
             {/* Title Field */}
 
@@ -107,7 +164,7 @@ class Modal extends React.Component {
                         type="text" 
                         name="selectedTitle"
                         value={this.state.selectedTitle}
-                        onChange={this.handleInputChange}
+                        onChange={this.onChange}
                       />
                     </form>
                   : this.state.selectedTitle
@@ -151,11 +208,66 @@ class Modal extends React.Component {
             {/* Favorite Field */}
            
             <h1>
-              <span className="bold-modal-title">Favorite?</span> {this.state.selectedBook.favorite===true ? "Yes" : "No"}
+              <span className="bold-modal-title">Favorite?</span>
+              
+              {/* {this.state.selectedBook.favorite===true ? "Yes" : "No"} */}
+              {
+                this.state.favoriteEditMode
+                  ? 
+                    <form>
+                      <select 
+                        className="select"
+                        name="selectedFavorite"
+                        value={this.state.selectedFavorite}
+                        onChange={this.handleInputChange}
+                      >
+                        <option value="Choose One">Choose One</option>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                      </select>
+                    </form>
+                  : this.state.selectedBook.favorite===true ? "Yes" : "No"
+              }
+              <button
+                onClick={() => this.setState({favoriteEditMode:true})}
+              >
+                <span className="icon is-small is-left">
+                  <i className="fa fa-pencil"></i>
+                </span>
+              </button>
             </h1>
+
+            {/* Rating Field */}
+
             <h1>
               <span className="bold-modal-title">Rating:</span> 
-              {this.state.selectedBook.rating}
+              {
+                this.state.ratingEditMode
+                  ? 
+                    <form>
+                      <select 
+                        className="select"
+                        name="selectedRating"
+                        value={this.state.selectedRating}
+                        onChange={this.handleInputChange}
+                      >
+                        <option value="Choose One">Choose One</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                    </form>
+                  : this.state.selectedBook.rating
+              }
+              <button
+                onClick={() => this.setState({ratingEditMode:true})}
+              >
+                <span className="icon is-small is-left">
+                  <i className="fa fa-pencil"></i>
+                </span>
+              </button>
             </h1>
 
             {/* Notes Field */}
@@ -185,13 +297,11 @@ class Modal extends React.Component {
               </button>
             </h1>
 
-            {/* Date Field */}
-
-            <h1>
-              <span className="bold-modal-title">Date Added:</span> 
-              {moment(this.state.selectedBook.dateCompleted).format("MMMM Do, YYYY")}
-            </h1>
+            
           </section>
+
+          {/* Footer */}
+
           <footer className="modal-card-foot">
             <button 
               className="button is-success"
