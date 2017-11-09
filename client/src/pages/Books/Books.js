@@ -7,6 +7,7 @@ import Completed from "../../components/Completed/Completed";
 import API from "../../utils/API";
 import Star from "../../components/BookBox/Star";
 import Modal from "../../components/Modal/Modal";
+import moment from 'moment';
 import './Books.css';
 
 class Books extends Component {
@@ -21,7 +22,7 @@ class Books extends Component {
     notes: "",
     favorite: false,
     wantToRead: false,
-    date: 0,
+    date: new Date(),
     currentRatingArr: [],
     categorySwitch: "Choose Category",
     showModal: false,
@@ -35,7 +36,7 @@ class Books extends Component {
       note: "notes go here",
       favorite: false,
       wantToRead: false,
-      date: 0
+      date: new Date()
     }
   };
 
@@ -50,10 +51,11 @@ class Books extends Component {
     API.getBooks()
       // .then(res => console.log(res.data[0]))
       .then(res =>
-        this.setState({ books: res.data, title: "", category: "Choose Category", author: "", rating:0, notes: "", favorite: false, date: 0 })
+        this.setState({ books: res.data, title: "", category: "Choose Category", categorySwitch: "Choose Category", author: "", rating:0, notes: "", favorite: false, date: new Date() })
       )
       .catch(err => console.log(err))
-
+    this.forceUpdate()
+    console.log('forceUpdated!')
   };
 
   handleInputChange = event => {
@@ -234,6 +236,7 @@ class Books extends Component {
                 deleteBook={this.deleteBook}
                 updateBook={this.updateBook}
                 updateModalBook={this.updateModalBook}
+                date={this.state.date}
             />
           }
           <div className="tile is-desktop is-ancestor">
