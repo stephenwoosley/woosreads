@@ -115,7 +115,6 @@ const Form = props =>
 
         }
         else {  
-          {/* console.log("want to read after flipping is " + props.wantToRead); */}
           return  <Submit 
                     author={props.author}
                     title={props.title}
@@ -125,46 +124,6 @@ const Form = props =>
                   />;
           
         }
-          {/* switch(props.categorySwitch) {
-
-              case 'Choose Category':
-                  return  <Submit />;
-
-              case 'Finished Reading':
-                  return  <div>
-                            <Rating 
-                              rating={props.rating}
-                              handleInputChange={props.handleInputChange}
-                            />
-                            <Favorite 
-                              favorite={props.favorite}
-                              handleInputChange={props.handleInputChange}
-                              flipFavorite={props.flipFavorite}
-                            />
-                            <Notes 
-                              notes={props.notes}
-                              handleInputChange={props.handleInputChange}
-                            />
-                            <Submit 
-                              author={props.author}
-                              title={props.title}
-                              category={props.category}
-                              submit={props.submit}
-                            />
-                          </div>;
-
-              case 'Want to Read':
-                  props.flipWantToRead
-                  console.log("want to read after flipping is " + props.wantToRead)
-                  return  <Submit 
-                            author={props.author}
-                            title={props.title}
-                            category={props.category}
-                            submit={props.submit}
-                          />;
-              default:
-                  return null;
-          } */}
         })()
       }
     </form>
