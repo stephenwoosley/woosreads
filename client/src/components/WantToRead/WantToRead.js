@@ -12,7 +12,7 @@ const WantToRead = (props) => {
       </p>
       <ul>
       {props.books.filter(book => {
-        return book.dateCompleted === "1970-01-01T00:00:00.000Z";
+        return book.wantToRead;
       }).map( book => 
         <BookBoxWant 
           key={book._id}

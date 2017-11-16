@@ -81,7 +81,7 @@ const Form = props =>
       </div>
 
       {/* Conditional Fields */}  
-            
+
       { (() => {
           switch(props.categorySwitch) {
 
@@ -112,6 +112,8 @@ const Form = props =>
                           </div>;
 
               case 'Want to Read':
+                  () => props.flipWantToRead()
+                  console.log("want to read after flipping is " + props.wantToRead)
                   return  <Submit 
                             author={props.author}
                             title={props.title}
