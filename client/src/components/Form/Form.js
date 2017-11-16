@@ -81,9 +81,51 @@ const Form = props =>
       </div>
 
       {/* Conditional Fields */}  
-            
+
       { (() => {
-          switch(props.categorySwitch) {
+
+        if(props.categorySwitch === "Choose Category"){
+
+          return  <Submit />;
+
+        }
+        else if (props.categorySwitch === "Finished Reading") {
+
+          return  <div>
+                    <Rating 
+                      rating={props.rating}
+                      handleInputChange={props.handleInputChange}
+                    />
+                    <Favorite 
+                      favorite={props.favorite}
+                      handleInputChange={props.handleInputChange}
+                      flipFavorite={props.flipFavorite}
+                    />
+                    <Notes 
+                      notes={props.notes}
+                      handleInputChange={props.handleInputChange}
+                    />
+                    <Submit 
+                      author={props.author}
+                      title={props.title}
+                      category={props.category}
+                      submit={props.submit}
+                    />
+                  </div>;
+
+        }
+        else {  
+          {/* console.log("want to read after flipping is " + props.wantToRead); */}
+          return  <Submit 
+                    author={props.author}
+                    title={props.title}
+                    category={props.category}
+                    wantToRead={props.wantToRead}
+                    submit={props.submit}
+                  />;
+          
+        }
+          {/* switch(props.categorySwitch) {
 
               case 'Choose Category':
                   return  <Submit />;
@@ -112,6 +154,8 @@ const Form = props =>
                           </div>;
 
               case 'Want to Read':
+                  props.flipWantToRead
+                  console.log("want to read after flipping is " + props.wantToRead)
                   return  <Submit 
                             author={props.author}
                             title={props.title}
@@ -120,7 +164,7 @@ const Form = props =>
                           />;
               default:
                   return null;
-          }
+          } */}
         })()
       }
     </form>

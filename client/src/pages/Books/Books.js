@@ -51,11 +51,10 @@ class Books extends Component {
     API.getBooks()
       // .then(res => console.log(res.data[0]))
       .then(res =>
-        this.setState({ books: res.data, title: "", category: "Choose Category", categorySwitch: "Choose Category", author: "", rating:0, notes: "", favorite: false, date: new Date() })
+        this.setState({ books: res.data, title: "", category: "Choose Category", categorySwitch: "Choose Category", author: "", rating:0, notes: "", favorite: false, wantToRead: false, date: new Date() })
       )
       .catch(err => console.log(err))
-    this.forceUpdate()
-    console.log('forceUpdated!')
+
   };
 
   handleInputChange = event => {
@@ -74,13 +73,15 @@ class Books extends Component {
     console.log(this.state.category);
     console.log(this.state.date);
 
-    if(this.state.category != "Want to Read"){
+    if(this.state.category !== "Want to Read"){
       console.log("doesn't equal Want to Read!")
       this.setState({date:Date.now()})
     }
     else {
       console.log("does equal Want to Read!")
-      console.log(this.state.date)
+      console.log("wantToRead state at form submit is: " + this.state.wantToRead)
+      this.flipWantToRead()
+      console.log("wantToRead state at form submit is: " + this.state.wantToRead)
     }
     
     API.saveBook({
@@ -89,7 +90,8 @@ class Books extends Component {
       rating: this.state.rating,
       note: this.state.notes,
       favorite: this.state.favorite,
-      dateCompleted: this.state.date
+      dateCompleted: this.state.date,
+      wantToRead: this.state.wantToRead
     })
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
@@ -105,6 +107,15 @@ class Books extends Component {
       : this.setState({favorite:true})
     
   }
+
+  flipWantToRead = () => {
+
+        console.log("BEFORE flipping in BOOKS.js/flipWantToRead: " + this.state.wantToRead)
+        if(this.state.wantToRead === false) {
+          this.setState({wantToRead:true})
+        }
+        console.log("AFTER flipping in BOOKS.js/flipWantToRead: " + this.state.wantToRead)
+      }
 
   flipModal = () => {
 
@@ -160,6 +171,8 @@ class Books extends Component {
     });
 
     this.setState({categorySwitch:value})
+
+    this.flipWantToRead()
 
   }
 
@@ -270,6 +283,7 @@ class Books extends Component {
                       flipCategorySwitch={this.flipCategorySwitch}
                       categorySwitch={this.state.categorySwitch}
                       notes={this.state.notes}
+                      flipWantToRead={this.state.flipWantToRead}
                     />
                   </article>
                 </div>
