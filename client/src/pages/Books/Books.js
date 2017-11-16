@@ -73,14 +73,14 @@ class Books extends Component {
     console.log(this.state.category);
     console.log(this.state.date);
 
-    if(this.state.category != "Want to Read"){
+    if(this.state.category !== "Want to Read"){
       console.log("doesn't equal Want to Read!")
       this.setState({date:Date.now()})
     }
     else {
       console.log("does equal Want to Read!")
       console.log("wantToRead state at form submit is: " + this.state.wantToRead)
-      this.setState({wantToRead: true})
+      this.flipWantToRead()
       console.log("wantToRead state at form submit is: " + this.state.wantToRead)
     }
     
@@ -108,14 +108,13 @@ class Books extends Component {
     
   }
 
-  flipWantToRead = e => {
-    
-        e.preventDefault()
-    
-        this.state.wantToRead
-          ? this.setState({wantToRead:false})
-          : this.setState({wantToRead:true})
-        
+  flipWantToRead = () => {
+
+        console.log("BEFORE flipping in BOOKS.js/flipWantToRead: " + this.state.wantToRead)
+        if(this.state.wantToRead === false) {
+          this.setState({wantToRead:true})
+        }
+        console.log("AFTER flipping in BOOKS.js/flipWantToRead: " + this.state.wantToRead)
       }
 
   flipModal = () => {
@@ -172,6 +171,8 @@ class Books extends Component {
     });
 
     this.setState({categorySwitch:value})
+
+    this.flipWantToRead()
 
   }
 
