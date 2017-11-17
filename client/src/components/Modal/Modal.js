@@ -15,9 +15,6 @@ import DatePicker from 'react-date-picker'
 // link DATEPICKER value with state of BOOKBOX's date
 
 
-
-
-
 class Modal extends React.Component {
   constructor (props) {
     super(props);
@@ -311,7 +308,6 @@ class Modal extends React.Component {
             </button>
             <button 
               className="button is-danger"
-              //onClick={() => this.state.deleteBook(this.state.selectedBook.id)}
               onClick={() => {window.confirm('Are you sure you want to delete this book?') && this.state.deleteBook(this.state.selectedBook.id)}}
             >
               Delete

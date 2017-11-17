@@ -4,10 +4,11 @@ import './BookBox.css';
 
 const BookBoxFavorite = props =>
   
-  <li
-    onClick={() => props.populateModalBook(props.book)}
-  >
-    <div className="box">
+  <li>
+    <div 
+      className="box"
+      onClick={() => props.populateModalBook(props.book)}
+    >
         <div className="deleteContainer">
           <span className="icon is-small is-left">
             <i className="fa fa-book"></i>

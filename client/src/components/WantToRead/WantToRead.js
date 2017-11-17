@@ -16,6 +16,7 @@ const WantToRead = (props) => {
         }).map( book => 
           <BookBoxWant 
             key={book._id}
+            deleteBook={props.deleteBook}
             populateModalBook={props.populateModalBook}
             title={book.title}
             author={book.author}

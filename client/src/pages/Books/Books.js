@@ -311,6 +311,7 @@ class Books extends Component {
                   books={this.state.books}
                   showModal={this.state.showModal}
                   populateModalBook={this.populateModalBook}
+                  deleteBook={this.deleteBook}
                 />
             </div>
           </div>
