@@ -122,7 +122,6 @@ const Form = props =>
                     wantToRead={props.wantToRead}
                     submit={props.submit}
                   />;
-          
         }
         })()
       }
