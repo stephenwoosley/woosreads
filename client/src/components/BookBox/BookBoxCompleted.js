@@ -3,10 +3,10 @@ import moment from "moment";
 import './BookBox.css';
 
 const BookBoxCompleted = props =>
-  <li
-    onClick={() => props.populateModalBook(props.book)}
-  >
-    <div className="box">
+  <li>
+    <div className="box"
+      onClick={() => props.populateModalBook(props.book)}
+    >
         <div>
               <div>
                 <span className="icon is-small is-left">

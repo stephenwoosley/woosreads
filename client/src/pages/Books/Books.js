@@ -49,7 +49,6 @@ class Books extends Component {
   loadBooks = () => {
 
     API.getBooks()
-      // .then(res => console.log(res.data[0]))
       .then(res =>
         this.setState({ books: res.data, title: "", category: "Choose Category", categorySwitch: "Choose Category", author: "", rating:0, notes: "", favorite: false, wantToRead: false, date: new Date() })
       )
@@ -70,18 +69,15 @@ class Books extends Component {
   handleFormSubmit = event => {
 
     event.preventDefault();
-    console.log(this.state.category);
-    console.log(this.state.date);
 
     if(this.state.category !== "Want to Read"){
-      console.log("doesn't equal Want to Read!")
-      this.setState({date:Date.now()})
+      this.setState({date:Date.now()});
     }
-    else {
-      console.log("does equal Want to Read!")
-      console.log("wantToRead state at form submit is: " + this.state.wantToRead)
-      this.flipWantToRead()
-      console.log("wantToRead state at form submit is: " + this.state.wantToRead)
+    else if (!this.state.wantToRead && this.state.category !== "Want to Read"){
+      this.setState({wantToRead: false})
+    }
+    else if (this.state.category === "Want to Read"){
+      this.flipWantToRead();
     }
     
     API.saveBook({
@@ -110,12 +106,11 @@ class Books extends Component {
 
   flipWantToRead = () => {
 
-        console.log("BEFORE flipping in BOOKS.js/flipWantToRead: " + this.state.wantToRead)
-        if(this.state.wantToRead === false) {
-          this.setState({wantToRead:true})
-        }
-        console.log("AFTER flipping in BOOKS.js/flipWantToRead: " + this.state.wantToRead)
-      }
+    console.log("flipWantToRead ran")
+    if(this.state.wantToRead === false) {
+      this.setState({wantToRead:true})
+    }
+  }
 
   flipModal = () => {
 
@@ -143,8 +138,7 @@ class Books extends Component {
 
   populateModalBook = (bookToRender) => {
 
-    console.log(bookToRender)
-
+    console.log("populateModalBook ran")
     let selectedBook = {...this.state.selectedBook};
 
     selectedBook.id = bookToRender._id;
@@ -172,7 +166,14 @@ class Books extends Component {
 
     this.setState({categorySwitch:value})
 
-    this.flipWantToRead()
+    // this if statement is not running. it's therefore not capturing and categorizing a Want to Read book. Why is it not running, but the console.log afterwards is?
+
+    if(this.state.category === "Want to Read") {
+      console.log("if statement evaluated")
+      this.flipWantToRead()
+    }
+
+    console.log("flipCategorySwitch ran")
 
   }
 
@@ -202,16 +203,12 @@ class Books extends Component {
   updateModalBook = (newState) => {
     
     this.setState(newState);
-    console.log("updatemomdalbook this.state.selectedBook.title is : " + this.state.selectedBook.title)
-    
     
   };
 
   updateBook = (id, book) => {
 
-    console.log("selectedBook state title is " + this.state.selectedBook.title);
     this.flipModal();
-    console.log("updateBook has " + id + " as the id and " + book.title + " as the book title.")
 
     API.updateBook(id, book)
     .then(res => this.loadBooks())
@@ -220,7 +217,7 @@ class Books extends Component {
   }
 
   deleteBook = id => {
-    console.log("book id inside deleteBook is " + id)
+    console.log("deleteBook ran");
     API.deleteBook(id)
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
@@ -311,6 +308,7 @@ class Books extends Component {
                   books={this.state.books}
                   showModal={this.state.showModal}
                   populateModalBook={this.populateModalBook}
+                  deleteBook={this.deleteBook}
                 />
             </div>
           </div>
