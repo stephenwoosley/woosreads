@@ -16,7 +16,7 @@ class Books extends Component {
     books: [],
     user: [], 
     title: "",
-    category: "",
+    category: "Choose Category",
     author: "",
     rating: 0,
     notes: "",
@@ -107,7 +107,7 @@ class Books extends Component {
   flipWantToRead = () => {
 
     console.log("flipWantToRead ran")
-    if(this.state.wantToRead === false) {
+    if(this.state.wantToRead = false) {
       this.setState({wantToRead:true})
     }
   }
@@ -159,19 +159,90 @@ class Books extends Component {
   flipCategorySwitch = event => {
 
     const { name, value } = event.target;
+    console.log("name set is " + name);
+    console.log("value set is " + value);
 
-    this.setState({
-      [name]: value
-    });
+    this.setState({category: value});
+    console.log("state after setting state is: " + this.state.category)
 
-    this.setState({categorySwitch:value})
-
-    // this if statement is not running. it's therefore not capturing and categorizing a Want to Read book. Why is it not running, but the console.log afterwards is?
-
-    if(this.state.category === "Want to Read") {
-      console.log("if statement evaluated")
-      this.flipWantToRead()
+    let setNameAndValue = () => {
+      return new Promise((resolve, reject) => {
+        return resolve(
+          this.setState({
+            [name]: value
+          })
+        );
+        console.log("In SETNAME&VALUE categorySwitch state is " + this.state.categorySwitch + " and category state is " + this.state.category)
+      })
     }
+
+    let setCategorySwitch = () => {
+      return new Promise((resolve, reject) => {
+        console.log("In SET CATEGORY SWITCH categorySwitch state is " + this.state.categorySwitch + " and category state is " + this.state.category)
+        return resolve(
+          this.setState({categorySwitch:value})
+          
+        );
+      })
+    }
+
+    let flipIt = () => {
+      return new Promise((resolve, reject) => {
+        console.log("category is: " + this.state.category)
+        if (this.state.category === "Want to Read") {
+          resolve(
+            this.flipWantToRead()
+          );
+        }
+        else {
+          var reason = new Error ("didn't work")
+          // reject(reason);
+        }    
+      })
+    }
+
+    setNameAndValue()
+      .then(setCategorySwitch())
+      .then(flipIt())
+      .catch((e) => {
+        console.log(e)
+      })
+
+   
+
+    
+
+    // set category state & categorySwitch to value of selected option
+    // then switch on the value of this.state.category
+    // if it's "Want to Read", run flipWantToRead
+    // if otherwise do nothing
+
+    // this.setState({
+    //   [name]: value
+    // });
+
+    
+
+
+    // below reflects what state was one switch before, which suggests switch runs before setState above. need promise.
+
+    // switch (this.state.categorySwitch) {
+    //   case "Choose Category":
+    //     console.log("switched on choose category")
+    //     break;
+    //   case "Finished Reading":
+    //     console.log("switched on finished reading")
+    //     break;
+    //   case "Want to Read":
+    //     console.log("switched on want to read");
+    //     () => this.flipWantToRead();
+    //     break;
+    // }
+
+    // if(this.state.category === "Want to Read") {
+    //   console.log("if statement evaluated");
+    //   () => this.flipWantToRead()
+    // }
 
     console.log("flipCategorySwitch ran")
 
