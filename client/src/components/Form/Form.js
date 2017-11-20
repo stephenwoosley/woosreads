@@ -114,7 +114,7 @@ const Form = props =>
                   </div>;
 
         }
-        else {  
+        else if (props.categorySwitch === "Want to Read"){ 
           return  <Submit 
                     author={props.author}
                     title={props.title}
