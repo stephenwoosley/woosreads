@@ -114,7 +114,6 @@ class Books extends Component {
 
   flipWantToRead = () => {
 
-    console.log("flipWantToRead ran")
     if(this.state.category === "Want to Read"){
       if(this.state.wantToRead === false) {
         this.setState({wantToRead:true})
@@ -130,6 +129,7 @@ class Books extends Component {
 
   flipModal = () => {
 
+    console.log("flipModal ran");
     if(this.state.showModal===false) {
       this.setState({showModal:true})
     }
@@ -186,6 +186,7 @@ class Books extends Component {
 
   removeFavorite = (id, book) => {
 
+console.log("remove favorite ran")
     if(book.favorite===true) {
       book.favorite = false;
       this.updateBook(id, book);
@@ -215,7 +216,7 @@ class Books extends Component {
 
   updateBook = (id, book) => {
 
-    this.flipModal();
+    console.log("updateBook from books.js ran")
 
     API.updateBook(id, book)
     .then(res => this.loadBooks())
@@ -228,7 +229,6 @@ class Books extends Component {
     API.deleteBook(id)
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
-    this.flipModal();
   };
 
   render() {

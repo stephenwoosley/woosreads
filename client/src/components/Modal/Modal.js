@@ -29,8 +29,8 @@ class Modal extends React.Component {
       showModal: props.showModal,
       flipModal: props.flipModal,
       selectedBook: props.selectedBook,
-      deleteBook: props.deleteBook,
-      updateBook: props.updateBook,
+      // deleteBook: props.deleteBook,
+      // updateBook: props.updateBook,
       updateModalBook: props.updateModalBook,
       selectedTitle: props.selectedTitle,
       selectedAuthor: props.selectedAuthor,
@@ -47,6 +47,9 @@ class Modal extends React.Component {
   }
 
   updateBook = (id, book) => {
+
+      console.log("update book from modal.js ran")
+
         console.log("updateBook title is " + book.title + " BEFORE assignment");
         console.log("updateBook author is " + book.author + " BEFORE assignment");
         console.log("updateBook rating is " + book.rating + " BEFORE assignment");
@@ -73,6 +76,14 @@ class Modal extends React.Component {
         .catch(err => console.log(err));
     
   }
+
+  deleteBook = id => {
+    console.log("deleteBook inside modal.js ran");
+    API.deleteBook(id)
+      .then(res => this.state.loadBooks())
+      .catch(err => console.log(err));
+    this.state.flipModal();
+  };
 
   handleInputChange = event => {
 
@@ -308,7 +319,7 @@ class Modal extends React.Component {
             </button>
             <button 
               className="button is-danger"
-              onClick={() => {window.confirm('Are you sure you want to delete this book?') && this.state.deleteBook(this.state.selectedBook.id)}}
+              onClick={() => {window.confirm('Are you sure you want to delete this book?') && this.deleteBook(this.state.selectedBook.id)}}
             >
               Delete
             </button>
