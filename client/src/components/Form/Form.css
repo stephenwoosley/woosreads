@@ -10,6 +10,10 @@ h1 { font-size: 1.5em; margin: 10px; } */
   border: none;
 }
 
+.full {
+  cursor: pointer;
+}
+
 .scroll-this {
     flex: 1 1 auto;
     overflow-y: auto;
@@ -34,19 +38,26 @@ h1 { font-size: 1.5em; margin: 10px; } */
   content: "\f02e";
 }
 
-.rating > .half:before { 
+/* .rating > .half:before { 
   content: "\f089";
   position: absolute;
+} */
+
+#favorite-color{
+  color: #FFD700;
+}
+#favorite-color:hover{
+  color: #FFED85;
 }
 
 .rating > label { 
   color: #ddd; 
- float: right; 
+  float: right; 
 }
 
 .favorite > label { 
   color: #ddd; 
- float: right; 
+  float: right; 
 }
 
 /***** CSS Magic to Highlight Stars on Hover *****/
@@ -55,8 +66,9 @@ h1 { font-size: 1.5em; margin: 10px; } */
 .favorite > input:checked ~ label,
 .rating:not(:checked) > label:hover, /* hover current star */
 .favorite:not(:checked) > label:hover,
+.favorite:not(:checked) > label:hover ~ label,
 .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
-.favorite:not(:checked) > label:hover ~ label { color: #FFD700; }
+
 
 .rating > input:checked + label:hover, /* hover current star when changing rating */
 .rating > input:checked ~ label:hover,
