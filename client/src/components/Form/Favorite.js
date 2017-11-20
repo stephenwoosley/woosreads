@@ -15,7 +15,17 @@ const Favorite = props => {
                 onChange={props.handleInputChange}
                 onClick={props.flipFavorite}
               >
-                <input type="radio" id="bookmark" name="favorite" /><label className = "favorite-bookmark" htmlFor="bookmark" title="Bookmark Me!"></label>
+                <input 
+                  type="radio" 
+                  id="bookmark" 
+                  name="favorite" 
+                />
+                <label 
+                  className = "favorite-bookmark full"
+                  id = {props.favorite ? 'favorite-color': null}
+                  htmlFor="bookmark" 
+                  title="Bookmark Me!"
+                />
               </fieldset>
             </div>
           </div>
