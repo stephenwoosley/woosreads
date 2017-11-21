@@ -43,6 +43,8 @@ class Books extends Component {
   componentDidMount() {
 
     this.loadBooks();
+    // console.log(window.getComputedStyle(React.findDOMNode(this.refs.container)).getPropertyValue("border-radius"));// border-radius can be replaced with any other style attributes;
+    
 
   }
 
@@ -265,7 +267,7 @@ console.log("remove favorite ran")
                     bookCount={this.state.books.length}
                   />
                 </div> 
-                <div className="tile is-parent is-8">
+                <div className="tile is-parent">
                   <article className="tile is-child notification is-danger">
                     <p className="title has-icons-left">
                       <span className="icon is-small is-left">
@@ -291,7 +293,8 @@ console.log("remove favorite ran")
                   </article>
                 </div>
               </div>
-              <div className="tile is-parent is-12">
+              <div className="tile is-12">
+              <div className="tile is-parent is-4">
                 <Favorites 
                   showModal={this.state.showModal}
                   populateModalBook={this.populateModalBook}
@@ -300,6 +303,8 @@ console.log("remove favorite ran")
                   selectedBook={this.state.selectedBook}
                   populateStars={(rating) => this.populateStars(rating)}
                 />
+              </div>
+              <div className="tile is-parent is-4">
                 <Completed
                   showModal={this.state.showModal}
                   populateModalBook={this.populateModalBook}
@@ -310,12 +315,15 @@ console.log("remove favorite ran")
                   //}}
                   populateStars={(rating) => this.populateStars(rating)}
                 />
+              </div>
+              <div className="tile is-parent is-4 max-me">
                 <WantToRead 
                   books={this.state.books}
                   showModal={this.state.showModal}
                   populateModalBook={this.populateModalBook}
                   deleteBook={this.deleteBook}
                 />
+              </div>
             </div>
           </div>
           </div> {/* end tile is-ancestor */}
