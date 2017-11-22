@@ -23,9 +23,15 @@ module.exports = {
   },
   update: function(req, res) {
     db.Book
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate({_id: req.params.id}, {$set: req.body}, {new: true})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  updateFavorite: function(req, res) {
+    db.Book
+    .findOneAndUpdate({ _id: req.params.id }, { $set: { favorite: req.body}})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
     db.Book

@@ -1,33 +1,58 @@
 import React from "react";
 
-const Profile = () =>
+const Profile = props =>
   <article className="tile is-child notification is-primary">
-    <div className="columns is-desktop is-vcentered">
-      <div className="column is-two-thirds">
-        <figure className="is-image is-128x128">
-          <img className="g-image"src="http://res.cloudinary.com/stephenrwoosley/image/upload/v1507595613/g-tough_ztntg7.png"></img>
-        </figure>
-        <p className="title">Gabriella Woosley</p>
-          {/* <span className="icon is-small is-left">
+    <div className="level is-mobile is-vcentered top-of-profile">
+      <div class="level-item has-text-centered">
+         {/* <p className="icon is-left">
             <i className="fa fa-flash"></i>
-          </span> */}
-          {/* <span className="tile-title">Gabriella Woosley</span> */}
-        <p className="subtitle">reading wizard</p>
+        </p> */}
+        <div>
+          <p className="name-title">Gabriella</p>
+          {/* <p className="icon is-left">
+            <i className="fa fa-flash"></i>
+            <i className="fa fa-flash"></i>
+            <i className="fa fa-flash"></i>
+          </p> */}
+          <p className="name-title">Woosley</p>
+        </div>
+        {/* <p className="icon is-left">
+            <i className="fa fa-flash"></i>
+        </p> */}
       </div>
-      <div className="column">
-          <div className="has-text-centered books-read">
-            <div className="is-size-4 books-read-title">
-              <strong>Books Read:</strong>
-            </div>
+      <div className="level-item has-text-centered">
+        <figure className="is-image is-128x128">
+          <img className="g-image"src="http://res.cloudinary.com/stephenrwoosley/image/upload/v1511204020/g-mean_nk8a0p.png"></img>
+        </figure>
+      </div>
+    </div>
+    <div className="level is-mobile is-vcentered bottom-of-profile">
+      <div className="level-item has-text-centered">
+        <div className="has-text-centered books-read">
             <div className="books-read-number">
-              <span className="tag is-danger is-large">
-                80
+              <p className="heading">Books Read</p>
+              <span className="tag title is-danger is-medium">
+                {props.bookCount}
               </span>
-            </div>
-          </div>
+            </div>         
+        </div>
+      </div>
+      <div className="level-item has-text-centered">
+        <div className="has-text-centered books-read">
+            <div className="books-read-number">
+              <p className="heading">Reading Level</p>
+              <span className="tag title is-danger is-medium">
+                {props.bookCount < 10 
+                  ? "Beginner" 
+                  : props.bookCount < 25
+                    ? "Level 1"
+                    : "Level 2"
+                }
+              </span>
+            </div>         
+        </div>
       </div>
     </div>
   </article>
-
 
 export default Profile;

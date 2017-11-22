@@ -8,17 +8,23 @@
     "client": "node scripts/start-client.js",
     "start": "concurrently \"nodemon server.js\" \"npm run client\"",
     "build": "node scripts/build.js",
+    "deploy": "yarn build && git add . && git commit -m \"Building for production\" && git push heroku master",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^3.5.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "riek": "^1.1.0"
   },
   "dependencies": {
     "express": "^4.15.4",
-    "react-router-dom": "^4.2.2",
-    "mongoose": "^4.12.1"
+    "moment": "^2.19.1",
+    "mongoose": "^4.12.1",
+    "react-date-picker": "^6.2.2",
+    "react-datepicker": "^0.60.2",
+    "react-edit-inline": "^1.0.8",
+    "react-router-dom": "^4.2.2"
   }
 }

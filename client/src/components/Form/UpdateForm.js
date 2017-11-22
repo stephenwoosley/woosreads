@@ -3,15 +3,14 @@ import Favorite from "./Favorite";
 import Notes from "./Notes";
 import Rating from "./Rating";
 import Submit from "./Submit";
-import "./Form.css";
+import "./UpdateForm.css";
 
-const Form = props =>
+const UpdateForm = props =>
     <form>
-
       {/* Title Field */}
       <div className="field is-horizontal">
         <div className="field-label is-normal">
-          <label className="label has-text-white">Title</label>
+          <label className="label has-text-white label-update">Title</label>
         </div>
         <div className="field-body">
           <div className="field">
@@ -19,7 +18,7 @@ const Form = props =>
             <input 
                 className="input" 
                 type="text" 
-                placeholder="Name"
+                placeholder={props.title}
                 name="title"
                 value={props.title}
                 onChange={props.handleInputChange}
@@ -35,7 +34,7 @@ const Form = props =>
       {/* Author Field */}
       <div className="field is-horizontal">
         <div className="field-label is-normal">
-          <label className="label has-text-white">Author</label>
+          <label className="label has-text-black label-update">Author</label>
         </div>
         <div className="field-body">
           <div className="field">
@@ -43,7 +42,7 @@ const Form = props =>
               <input 
                 className="input" 
                 type="text" 
-                placeholder="Name"
+                placeholder={props.author}
                 name="author"
                 value={props.author}
                 onChange={props.handleInputChange}
@@ -59,7 +58,7 @@ const Form = props =>
       {/* Category Field */}
       <div className="field is-horizontal">
         <div className="field-label is-normal">
-          <label className="label has-text-white">Category</label>
+          <label className="label has-text-black label-update">Category</label>
         </div>
         <div className="field-body">
           <div className="field is-narrow">
@@ -70,8 +69,8 @@ const Form = props =>
                   onChange={props.flipCategorySwitch}
                   name="category"
                 >
-                  <option value="Choose Category">Choose Category</option>
-                  <option value="Finished Reading">Finished Reading</option>
+                <option></option>
+                <option value="Finished Reading">Finished Reading</option>
                   <option value="Want to Read">Want to Read</option>
                 </select>
               </div>
@@ -79,52 +78,29 @@ const Form = props =>
           </div>
         </div>
       </div>
-
-      {/* Conditional Fields */}  
-
-      { (() => {
-
-        if(props.categorySwitch === "Choose Category"){
-
-          return  <Submit />;
-
-        }
-        else if (props.categorySwitch === "Finished Reading") {
-
-          return  <div>
-                    <Rating 
-                      rating={props.rating}
-                      handleInputChange={props.handleInputChange}
-                    />
-                    <Favorite 
-                      favorite={props.favorite}
-                      handleInputChange={props.handleInputChange}
-                      flipFavorite={props.flipFavorite}
-                    />
-                    <Notes 
-                      notes={props.notes}
-                      handleInputChange={props.handleInputChange}
-                    />
-                    <Submit 
-                      author={props.author}
-                      title={props.title}
-                      category={props.category}
-                      submit={props.submit}
-                    />
-                  </div>;
-
-        }
-        else if (props.categorySwitch === "Want to Read"){ 
-          return  <Submit 
-                    author={props.author}
-                    title={props.title}
-                    category={props.category}
-                    wantToRead={props.wantToRead}
-                    submit={props.submit}
-                  />;
-        }
-        })()
-      }
+      <div>
+        <Rating 
+          rating={props.rating}
+          handleInputChange={this.handleInputChange}
+        />
+        <Favorite 
+          favorite={props.favorite}
+          handleInputChange={props.handleInputChange}
+          flipFavorite={props.flipFavorite}
+        />
+        <Notes 
+          notes={props.notes}
+          handleInputChange={props.handleInputChange}
+        />
+        <Submit 
+          author={props.author}
+          title={props.title}
+          category={props.category}
+          rating={props.rating}
+          submit={props.submit}
+        />
+      </div>
     </form>
 
-export default Form;
+
+export default UpdateForm;

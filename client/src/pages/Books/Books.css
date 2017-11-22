@@ -2,14 +2,142 @@
   margin-left: 15px;
 }
 
-.g-image {
-  border-radius: 50%;
+.bold-modal-title {
+  font-weight: bold;
+  margin-right: 10px;
+  line-height: 2.25;
 }
+
+/* .is-parent .is-child {
+  margin: 0 5px 0 5px;
+} */
+
+ .g-image {
+  border-radius: 50%;
+  max-height: 128px;
+  border: 3px solid #fff;
+} 
 
 .books-read {
   text-align: center;
 }
 
-.book-count {
-  
+.bookbox-title{
+  margin-left: 7.5px;
+}
+
+.bookbox-star {
+  color: #FFD700;
+}
+
+.box {
+  margin-bottom: .25rem
+}
+
+.title {
+  padding-left: 5px;
+}
+
+.un-bookmark.is-small, .delete.is-small{
+  position: absolute;
+  right: .05em;
+  top: .05em;
+}
+
+.un-bookmark-span{
+  display: -webkit-inline-box;
+  color: #5FCDB3;
+}
+
+.un-bookmark-span:hover{
+  color: #FF2B56;
+}
+
+.deleteContainer {
+  position: relative;
+}
+
+.name-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.top-of-profile {
+  margin-bottom: 5% !important;
+}
+
+.bottom-of-profile {
+  border-top: 3px solid #fff
+}
+
+.books-read-number {
+  margin-top: 30%;
+}
+
+/* .completed-tile {
+  margin: 0px 10px 0px 10px;
+} */
+
+.max-me {
+  overflow:hidden !important;
+}
+
+.wunderbox {
+  width: 133.33%;
+}
+
+
+@media screen and (min-width: 100px) and (max-width: 374px) {
+  .name-title {
+    font-size: 1.5rem !important;
+  }
+  .books-read-title {
+    font-size: 1.25rem !important;
+  }
+  .g-image {
+    height: 80px;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 414px) {
+  .name-title {
+    font-size: 1.5rem !important;
+  }
+  .books-read-title {
+    font-size: 1.25rem !important;
+  }
+  .g-image {
+    height: 100px;
+  }
+}
+
+@media screen and (min-width: 415px) and (max-width: 768px) {
+  .name-title {
+    font-size: 2rem !important;
+  }
+  .books-read-title {
+    font-size: 1.75rem !important;
+  }
+  .g-image {
+    height: 180px;
+  }
+}
+
+
+@media screen and (min-width: 769px) and (max-width: 1094px) {
+  .name-title {
+    font-size: 1.25rem !important;
+  }
+  .g-image {
+    height: 80px;
+  }
+  .heading {
+    font-size: .5em;
+  }
+  .bookbox-title {
+    font-size: .75em;
+  }
+  .tile-title, .title > .icon {
+    font-size: 1.5rem !important;
+  }
 }
