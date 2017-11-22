@@ -3,7 +3,7 @@ import BookBoxWant from "../BookBox/BookBoxWant";
 
 const WantToRead = (props) => {
   return(
-    <div>
+    <div className="wunderbox">
       <article className="tile is-child notification is-info">
         <div className="content">
           <p className="title">
