@@ -82,6 +82,10 @@
   overflow:hidden !important;
 }
 
+.wunderbox {
+  width: 133.33%;
+}
+
 
 @media screen and (min-width: 100px) and (max-width: 374px) {
   .name-title {
