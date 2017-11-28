@@ -27,6 +27,7 @@ class Books extends Component {
     categorySwitch: "Choose Category",
     showModal: false,
     showAlert: false,
+    booksCompleted: 0,
     selectedBook: {
       id: 0,
       title: "title",
@@ -43,9 +44,7 @@ class Books extends Component {
   componentDidMount() {
 
     this.loadBooks();
-    // console.log(window.getComputedStyle(React.findDOMNode(this.refs.container)).getPropertyValue("border-radius"));// border-radius can be replaced with any other style attributes;
     
-
   }
 
   componentDidUpdate() {
