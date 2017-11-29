@@ -4,21 +4,10 @@ const Profile = props =>
   <article className="tile is-child notification is-primary">
     <div className="level is-mobile is-vcentered top-of-profile">
       <div class="level-item has-text-centered">
-         {/* <p className="icon is-left">
-            <i className="fa fa-flash"></i>
-        </p> */}
         <div>
           <p className="name-title">Gabriella</p>
-          {/* <p className="icon is-left">
-            <i className="fa fa-flash"></i>
-            <i className="fa fa-flash"></i>
-            <i className="fa fa-flash"></i>
-          </p> */}
           <p className="name-title">Woosley</p>
         </div>
-        {/* <p className="icon is-left">
-            <i className="fa fa-flash"></i>
-        </p> */}
       </div>
       <div className="level-item has-text-centered">
         <figure className="is-image is-128x128">

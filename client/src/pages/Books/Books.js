@@ -12,6 +12,12 @@ import './Books.css';
 
 class Books extends Component {
 
+  // want a function that tallies up the number of completed books each time the page loads
+
+  // componentDidMount
+  // store the number in state
+  // function could map through the books array, incrementing the booksCompleted for each book that is wantToRead=FALSE
+
   state = {
     books: [],
     user: [], 
@@ -27,6 +33,7 @@ class Books extends Component {
     categorySwitch: "Choose Category",
     showModal: false,
     showAlert: false,
+    booksCompleted: 0,
     selectedBook: {
       id: 0,
       title: "title",
@@ -43,9 +50,7 @@ class Books extends Component {
   componentDidMount() {
 
     this.loadBooks();
-    // console.log(window.getComputedStyle(React.findDOMNode(this.refs.container)).getPropertyValue("border-radius"));// border-radius can be replaced with any other style attributes;
     
-
   }
 
   componentDidUpdate() {
@@ -56,13 +61,23 @@ class Books extends Component {
 
   }
 
-  loadBooks = () => {
+  countCompleted = () => {
+    console.log("books inside countCompleted is " + this.state.books[1]);
+    let books = this.state.books;
+    for (var book in books) {
+      !books[book.wantToRead] && this.state.booksCompleted === this.state.booksCompleted + 1;
+      console.log("for in ran once");
+    }
+    console.log("countCompleted ran and booksCompleted is " + this.state.booksCompleted)
+  }
 
+  loadBooks = () => {
     API.getBooks()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", categorySwitch: "Choose Category", rating:0, notes: "", favorite: false, wantToRead: false, date: new Date() })
-      )
-      .catch(err => console.log(err))
+        this.setState({ books: res.data, title: "", author: "", categorySwitch: "Choose Category", rating:0, notes: "", favorite: false, wantToRead: false, date: new Date()})
+       ).then(
+          this.countCompleted()
+      ).catch(err => console.log(err))
 
   };
 
