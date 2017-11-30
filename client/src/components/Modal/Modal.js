@@ -1,18 +1,6 @@
-import React, {Component} from 'react';
-import UpdateForm from '../Form/UpdateForm';
+import React from 'react';
 import moment from 'moment';
 import API from "../../utils/API";
-import DatePicker from 'react-date-picker'
-
-// initial state of DATE in books.js = now
-
-// held date inside each bookbox = date entered
-
-// when opening a BOOKBOX, grab that date and display it in the modal DATE field
-
-// when dateEditMode is active, show DATEPICKER with bookbox's date shown
-
-// link DATEPICKER value with state of BOOKBOX's date
 
 
 class Modal extends React.Component {
@@ -29,8 +17,6 @@ class Modal extends React.Component {
       showModal: props.showModal,
       flipModal: props.flipModal,
       selectedBook: props.selectedBook,
-      // deleteBook: props.deleteBook,
-      // updateBook: props.updateBook,
       updateModalBook: props.updateModalBook,
       selectedTitle: props.selectedTitle,
       selectedAuthor: props.selectedAuthor,
@@ -48,26 +34,12 @@ class Modal extends React.Component {
 
   updateBook = (id, book) => {
 
-      console.log("update book from modal.js ran")
-
-        console.log("updateBook title is " + book.title + " BEFORE assignment");
-        console.log("updateBook author is " + book.author + " BEFORE assignment");
-        console.log("updateBook rating is " + book.rating + " BEFORE assignment");
-        console.log("updateBook favorite is " + book.favorite + " BEFORE assignment");
-        console.log("updateBook note is " + book.note + " BEFORE assignment");
-        console.log("updateBook date is " + book.date + " BEFORE assignment");
         book.author = this.state.selectedAuthor
         book.title = this.state.selectedTitle
         book.rating = this.state.selectedRating
         book.favorite = this.state.selectedFavorite
         book.note = this.state.selectedNote
         book.date = this.state.selectedDate
-        console.log("updateBook title is " + book.title + " AFTER assignment");
-        console.log("updateBook author is " + book.author + " AFTER assignment");
-        console.log("updateBook rating is " + book.rating + " AFTER assignment");
-        console.log("updateBook favorite is " + book.favorite + " AFTER assignment");
-        console.log("updateBook note is " + book.note + " AFTER assignment");
-        console.log("updateBook date is " + book.date + " AFTER assignment");
 
         this.state.flipModal();
     
@@ -78,7 +50,7 @@ class Modal extends React.Component {
   }
 
   deleteBook = id => {
-    console.log("deleteBook inside modal.js ran");
+
     API.deleteBook(id)
       .then(res => this.state.loadBooks())
       .catch(err => console.log(err));
@@ -87,11 +59,11 @@ class Modal extends React.Component {
 
   handleInputChange = event => {
 
-    console.log("handleInputChange triggered")
-    
     const { name, value } = event.target;
     if(typeof value === 'string'){
-      value === "yes" && value === true;
+      if(value === "yes") {
+        value === true;
+      }
       this.setState({
         [name]: value
       });
@@ -139,24 +111,6 @@ class Modal extends React.Component {
             <h1>
               <span className="bold-modal-title">Date Added:</span> 
               {moment(this.state.selectedDate).format("MMMM Do, YYYY")}
-              {/* {
-                this.state.dateEditMode
-                  ?
-                  <DatePicker
-                      value={this.state.date}
-                      name="date"
-                      onChange={this.onChange}
-                      className="input"
-                  />
-                  : moment(this.state.selectedDate).format("MMMM Do, YYYY")
-              }
-              <button
-                onClick={() => this.setState({dateEditMode:true})}
-              >
-                <span className="icon is-small is-left">
-                  <i className="fa fa-pencil"></i>
-                </span>
-              </button> */}
             </h1>
 
             {/* Title Field */}
@@ -218,7 +172,6 @@ class Modal extends React.Component {
             <h1>
               <span className="bold-modal-title">Favorite?</span>
               
-              {/* {this.state.selectedBook.favorite===true ? "Yes" : "No"} */}
               {
                 this.state.favoriteEditMode
                   ? 

@@ -3,7 +3,7 @@ import React from "react";
 const Profile = props =>
   <article className="tile is-child notification is-primary">
     <div className="level is-mobile is-vcentered top-of-profile">
-      <div class="level-item has-text-centered">
+      <div className="level-item has-text-centered">
         <div>
           <p className="name-title">Gabriella</p>
           <p className="name-title">Woosley</p>
@@ -11,7 +11,7 @@ const Profile = props =>
       </div>
       <div className="level-item has-text-centered">
         <figure className="is-image is-128x128">
-          <img className="g-image"src="http://res.cloudinary.com/stephenrwoosley/image/upload/v1511204020/g-mean_nk8a0p.png"></img>
+          <img className="g-image"src="http://res.cloudinary.com/stephenrwoosley/image/upload/v1511204020/g-mean_nk8a0p.png" alt="tough-g"></img>
         </figure>
       </div>
     </div>

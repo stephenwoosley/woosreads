@@ -7,7 +7,6 @@ import Completed from "../../components/Completed/Completed";
 import API from "../../utils/API";
 import Star from "../../components/BookBox/Star";
 import Modal from "../../components/Modal/Modal";
-import moment from 'moment';
 import './Books.css';
 
 class Books extends Component {
@@ -17,6 +16,8 @@ class Books extends Component {
   // componentDidMount
   // store the number in state
   // function could map through the books array, incrementing the booksCompleted for each book that is wantToRead=FALSE
+
+  // loop through books array once it's populated.
 
   state = {
     books: [],
@@ -50,6 +51,7 @@ class Books extends Component {
   componentDidMount() {
 
     this.loadBooks();
+    console.log("books array is: " + this.state.books)
     
   }
 
@@ -65,7 +67,10 @@ class Books extends Component {
     console.log("books inside countCompleted is " + this.state.books[1]);
     let books = this.state.books;
     for (var book in books) {
-      !books[book.wantToRead] && this.state.booksCompleted === this.state.booksCompleted + 1;
+      if(!books[book.wantToRead]) {
+        this.setState({"booksCompleted": this.state.booksCompleted + 1});
+        console.log("booksCompleted is now " + this.state.booksCompleted)
+      } 
       console.log("for in ran once");
     }
     console.log("countCompleted ran and booksCompleted is " + this.state.booksCompleted)
@@ -76,7 +81,7 @@ class Books extends Component {
       .then(res =>
         this.setState({ books: res.data, title: "", author: "", categorySwitch: "Choose Category", rating:0, notes: "", favorite: false, wantToRead: false, date: new Date()})
        ).then(
-          this.countCompleted()
+        this.countCompleted()
       ).catch(err => console.log(err))
 
   };
@@ -94,6 +99,8 @@ class Books extends Component {
   handleFormSubmit = event => {
 
     event.preventDefault();
+
+    console.log("books array is: " + this.state.books)
 
     if(this.state.category !== "Want to Read"){
       this.setState({date:Date.now()});
@@ -146,7 +153,6 @@ class Books extends Component {
 
   flipModal = () => {
 
-    console.log("flipModal ran");
     if(this.state.showModal===false) {
       this.setState({showModal:true})
     }
@@ -171,7 +177,6 @@ class Books extends Component {
 
   populateModalBook = (bookToRender) => {
 
-    console.log("populateModalBook ran")
     let selectedBook = {...this.state.selectedBook};
 
     selectedBook.id = bookToRender._id;
@@ -219,8 +224,8 @@ console.log("remove favorite ran")
       ratingArray.push(i);
     }
 
-    return ratingArray.map(rating => {
-        return <Star/>
+    return ratingArray.map((rating, i) => {
+        return <Star key={i}/>
     })
 
   }
