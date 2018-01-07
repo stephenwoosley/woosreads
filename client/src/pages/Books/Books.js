@@ -12,12 +12,16 @@ import './Books.css';
 class Books extends Component {
 
   // want a function that tallies up the number of completed books each time the page loads
-
+  // 
   // componentDidMount
   // store the number in state
   // function could map through the books array, incrementing the booksCompleted for each book that is wantToRead=FALSE
-
+  //
   // loop through books array once it's populated.
+  // 
+  // need to tally books completed, but only if they are actually completed, not want to read
+  // 
+  // 
 
   state = {
     books: [],
@@ -330,9 +334,6 @@ console.log("remove favorite ran")
                   populateModalBook={this.populateModalBook}
                   books={this.state.books}
                   selectedBook={this.state.selectedBook}
-                  //{function(rating){
-                    //return this.populateStars(rating)
-                  //}}
                   populateStars={(rating) => this.populateStars(rating)}
                 />
               </div>
